@@ -1,5 +1,6 @@
 * {
-    background-color: aquamarine
+    background-color: black;
+    color: white;
 }
 
 #generalizationButtons, #distortionButtons, #deletionButtons {
@@ -7,17 +8,21 @@
     margin: 20px;
 }
 
+#generalizationDropdown, #distortionDropdown, #deletionDropdown {
+    display: inline-grid;
+    margin:5px;
+}
+
 .mappingButton {
-    background-color: lightgreen;
+    background-color: darkgreen;
     display: block;
     padding: 15px;
 }
 
-
 .dropbtn {
-    background-color: #3498DB;
+    background-color: darkblue;
     color: white;
-    padding: 16px;
+    padding: 10px;
     font-size: 16px;
     border: none;
     cursor: pointer;
@@ -29,7 +34,7 @@
 
 .dropdown {
     position: relative;
-    display: inline-block;
+    display: content;
 }
 
 .dropdown-content {
@@ -39,6 +44,7 @@
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    border: solid;
 }
 
 .dropdown-content a {
@@ -49,9 +55,12 @@
 }
 
 .dropdownBtn {
-    background-color: cyan;
+    background-color: darkslategray;
+    color: lightgoldenrodyellow;
+    font-weight: bold;
+    padding: 15px;
 }
 
 .dropdown a:hover {
-    background-color: #ddd;
+    background-color: blue;
 }

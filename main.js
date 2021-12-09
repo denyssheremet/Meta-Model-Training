@@ -13,14 +13,13 @@ var activeMappings = [...mappings];
 function showDropdown() {
     if (dropdownShowing) {
         document.getElementById("myDropdown").style.display = "none";
+        chooseSentence();
     } else {
         document.getElementById("myDropdown").style.display = "block";
+        document.getElementById("sentence").innerHTML = "";
     }
     dropdownShowing = !dropdownShowing;
-
 }
-
-
 
 function answerChosen(answer) {
     if (answer === currentMapping) {
@@ -32,66 +31,59 @@ function answerChosen(answer) {
 };
 
 function chooseSentence() {
-    currentMapping = mappings[Math.floor(Math.random() * mappings.length)];
+    currentMapping = activeMappings[Math.floor(Math.random() * activeMappings.length)];
     currentSentence = metaModelSentences[currentMapping].examples[Math.floor(Math.random() * metaModelSentences[currentMapping].examples.length)]
     document.getElementById("sentence").innerHTML = currentSentence;
 };
 
 function selectMappings(selectedMapping) {
-    console.log(selectedMapping);
-
     var index = activeMappings.indexOf(selectedMapping);
+
     if (index != -1) {
-        document.getElementById("dropdown:" + selectedMapping).style.backgroundColor = "gray";
+        document.getElementById("dropdown:" + selectedMapping).style.color = "#1a1a1a";
+        document.getElementById("dropdown:" + selectedMapping).style.fontWeight = "normal";
         document.getElementById("answer:" + selectedMapping).style.display = "none";
         activeMappings.splice(index, 1);
-
     } else {
-        document.getElementById("dropdown:" + selectedMapping).style.backgroundColor = "cyan";
+        document.getElementById("dropdown:" + selectedMapping).style.color = "lightgoldenrodyellow";
+        document.getElementById("dropdown:" + selectedMapping).style.fontWeight = "bold";
         document.getElementById("answer:" + selectedMapping).style.display = "block";
         activeMappings.push(selectedMapping);
     };
-    console.log(activeMappings);
 }
 
+function makeAnswerButton(name, appendTo) {
+    let btn = document.createElement("button");
+    btn.id = "answer:" + name;
+    btn.innerHTML = name;
+    btn.className = "mappingButton";
+    btn.onclick = function () { answerChosen(name); };
+    document.getElementById(appendTo).appendChild(btn);
+}
+
+function makeDropdownButton(name, appendTo) {
+    let btn = document.createElement("button");
+    btn.id = "dropdown:" + name;
+    btn.className = "dropdownBtn";
+    btn.innerHTML = name;
+    btn.onclick = function () { selectMappings(name); };
+    document.getElementById(appendTo).appendChild(btn);
+}
 
 window.addEventListener("load", function () {
 
-    //Add dropdown buttons
-    for (var i = 0; i < mappings.length; i++) {
-        let btn = document.createElement("button");
-        btn.id = "dropdown:" + mappings[i];
-        btn.className = "dropdownBtn";
-        console.log(btn.id);
-        btn.innerHTML = mappings[i];
-        btn.onclick = function () { selectMappings(btn.innerHTML); };
-        document.getElementById("myDropdown").appendChild(btn);
-    }
-
     // generate Buttons for different answers
     for (let i = 0; i < deletions.length; i++) {
-        let btn = document.createElement("button");
-        btn.id = "answer:" + deletions[i];
-        btn.innerHTML = deletions[i];
-        btn.className = "mappingButton";
-        btn.onclick = function () { answerChosen(deletions[i]); };
-        document.getElementById("deletionButtons").appendChild(btn);
+        makeAnswerButton(deletions[i], "deletionButtons");
+        makeDropdownButton(deletions[i], "deletionDropdown");
     }
     for (let i = 0; i < distortions.length; i++) {
-        let btn = document.createElement("button");
-        btn.id = "answer:" + distortions[i];
-        btn.innerHTML = distortions[i];
-        btn.className = "mappingButton";
-        btn.onclick = function () { answerChosen(distortions[i]); };
-        document.getElementById("distortionButtons").appendChild(btn);
+        makeAnswerButton(distortions[i], "distortionButtons");
+        makeDropdownButton(distortions[i], "distortionDropdown");
     }
     for (let i = 0; i < generalizations.length; i++) {
-        let btn = document.createElement("button");
-        btn.id = "answer:" + generalizations[i];
-        btn.innerHTML = generalizations[i];
-        btn.className = "mappingButton";
-        btn.onclick = function () { answerChosen(generalizations[i]); };
-        document.getElementById("generalizationButtons").appendChild(btn);
+        makeAnswerButton(generalizations[i], "generalizationButtons");
+        makeDropdownButton(generalizations[i], "generalizationDropdown");
     }
     chooseSentence();
 });

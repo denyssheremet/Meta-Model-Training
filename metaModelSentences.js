@@ -201,7 +201,7 @@ var metaModelSentences = {
     This exercise will inspire me
     I'm unhappy when he goes away
     If I stay in this job I have to work harder
-    If you want a pay rise you have to stay late
+    If you want a pay raise you have to stay late
     If I do that I'll get into trouble
     My boss makes me angry
     If you do that I'll leave
