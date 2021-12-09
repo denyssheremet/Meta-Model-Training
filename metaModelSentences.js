@@ -83,6 +83,7 @@ var metaModelSentences = {
     You must turn your mobile off in the office 
     We're all going to be made redundant
     They say you should do more exercise 
+    Americans can express themselves 
     If you can't beat them……
     `},
 
@@ -255,7 +256,6 @@ var metaModelSentences = {
     I'll never be able to get fit
     Everybody's talking about it 
     They always have an excuse
-    American's can express themselves 
     Everybody works too hard
     Sales people can never be trusted
     NLP practitioners are always healthy

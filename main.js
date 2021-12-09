@@ -3,6 +3,8 @@ const distortions = ["Nominalization", "Cause and Effect", "Mind Reading", "Comp
 const generalizations = ["Universal Quantifiers", "Modal Operator of Necessity", "Modal Operator of Possibility", "Presupposition"];
 const mappings = deletions.concat(distortions, generalizations);
 const mappingTypes = [deletions, distortions, generalizations];
+var currentSentence = "";
+var currentMapping = "";
 
 
 window.addEventListener("load", function () {
@@ -26,6 +28,11 @@ window.addEventListener("load", function () {
         btn.className = "mappingButton";
         document.getElementById("generalizationButtons").appendChild(btn);
     }
-
-
 });
+
+function chooseSentence() {
+    currentMapping = mappings[Math.floor(Math.random() * mappings.length)];
+    currentSentence = metaModelSentences[currentMapping].examples[Math.floor(Math.random() * metaModelSentences[currentMapping].examples.length)]
+    console.log(currentSentence);
+    console.log(currentMapping)
+};
