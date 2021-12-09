@@ -1,0 +1,331 @@
+const deletions = ["Simple Deletion", "Comparative Deletion", "Lack of Referential Index", "Unspecified Noun", "Unspecified Verb"];
+const distortions = ["Nominalization", "Cause and Effect", "Mind Reading", "Complex Equivalence", "Lost Comparative"];
+const generalizations = ["Universal Quantifiers", "Modal Operator of Necessity", "Modal Operator of Possibility", "Presupposition"];
+const mappings = deletions.concat(distortions, generalizations);
+const mappingTypes = [deletions, distortions, generalizations];
+
+
+window.addEventListener("load", function () {
+
+    // generate Buttons for different answers
+    for (let i = 0; i < deletions.length; i++) {
+        let btn = document.createElement("button");
+        btn.innerHTML = deletions[i];
+        btn.className = "mappingButton";
+        document.getElementById("deletionButtons").appendChild(btn);
+    }
+    for (let i = 0; i < distortions.length; i++) {
+        let btn = document.createElement("button");
+        btn.innerHTML = distortions[i];
+        btn.className = "mappingButton";
+        document.getElementById("distortionButtons").appendChild(btn);
+    }
+    for (let i = 0; i < generalizations.length; i++) {
+        let btn = document.createElement("button");
+        btn.innerHTML = generalizations[i];
+        btn.className = "mappingButton";
+        document.getElementById("generalizationButtons").appendChild(btn);
+    }
+
+    // Turn sentence strings into arrays
+    for (var [key, value] of Object.entries(sentences)) {
+        sentences[key] = value.split("\n").slice(1,-1);
+      }
+    console.log(sentences["Mind Reading"]);
+
+});
+
+
+var sentences = {
+
+"Unspecified Noun":
+`
+I want a change
+It's terrible 
+I have lots of skills
+Meet you at the pub
+I want a computer
+I want the report tomorrow 
+I'm signing you up for a course
+I need it now 
+We need this done today
+I need the report 
+Get me a sandwich
+Talk to the customer 
+I need a new car
+Get the problem fixed 
+I read it in a magazine
+`,
+
+"Unspecified Verb": 
+`
+She rejected me
+I'm enjoying this
+I calmed the customer down 
+My boss ruined me
+I've taken the heat out of the situation 
+I did a great piece of work
+I've seen the writing on the wall 
+They get on really well
+He's running the department badly 
+I like him
+This company is going places 
+She always falls
+I told him, now he should do it properly 
+I'm running on empty
+At least he tries 
+Let's go!
+`,
+
+"Nominalization":
+`
+I want recognition
+We have made our decision 
+Your work needs more attention
+I have a bad feeling 
+I want more choice
+There's no relationship 
+We had a great meeting
+Failure worries me 
+I want publicity
+Our customers have no patience 
+Sales doesn't work
+He makes a bad impression 
+Marketing doesn't work
+We need better management 
+Manufacturing has no future
+I want more direction 
+Decisions are hard
+`,
+
+"Lack of Referential Index":
+`
+They don't rate me
+The writing's on the wall 
+People are stupid
+They should know better 
+It needs to be done properly
+People make mistake 
+Those people need to be disciplined
+Those products are expensive 
+One knows what's best
+This happens everyday 
+If you learn NLP you will become very rich
+We shouldn't do that 
+It's either them or us
+You must turn your mobile off in the office 
+We're all going to be made redundant
+They say you should do more exercise 
+If you can't beat them……
+`,
+
+"Simple Deletion":
+`
+I'm unhappy
+You can't Help me
+I'm fed up 
+I'm sad
+We can manage 
+I just can't start
+He is wrong 
+It's perfect
+I know 
+It's all wrong
+I feel curious 
+I don't want to
+Never again 
+He can't
+You must not do that 
+Stop it
+`,
+
+"Comparative Deletion":
+`
+Our new product is more effective
+It's for the greater good 
+He's more sensitive
+NLP is better 
+She goes further
+This is far more efficient 
+You look happier
+Hard beds are better 
+He's more tolerant
+She's much brighter 
+This is more complicated
+This is more like it 
+Green is calmer
+She's more fun 
+This is getting much easier
+Blue is better 
+I'm enjoying this so much more
+`,
+
+"Complex Equivalence":
+`
+He's silent…..He doesn't like what I've done
+A good relationship means never having to say sorry
+To stay in this job I have to work harder
+You can't have a well paid job that is enjoyable too
+If you want success you have to give up your home life
+That means trouble
+He came in late on Saturday; I'm going to have to fire him
+When you talk like that I know you don't mean it
+He wears the same colour shirt as the boss: that means he's in for promotion
+I saw them down the pub together; they must be having an affair
+This is the only way
+He doesn't know what I want because he doesn't care about me
+She goes down to the gym so she must be healthy
+`,
+
+"Lost Comparative":
+`
+it's disaster to be made redundant
+People make mistake 
+Managers are overpaid
+You can't trust salespeople
+Marketing is an easy job
+They should have seen it coming 
+People like people who are like them
+They're always doing that 
+People learn from people who are different
+This report needs finishing 
+Learning NLP will make you more successful
+A meeting was held 
+This needs fixing
+Mistakes have been made 
+This report needs finishing
+Nobody is pulling their weight 
+A meeting has already been held about this
+People are more flexible these days 
+They've been at it again
+`,
+
+"Mind Reading":
+`
+you don't rate me
+I know you don't believe me 
+She's really happy now
+He doesn't want to help me 
+He'll laugh at this
+You just don't care 
+They will think I'm stupid if I do that
+He's ever so happy 
+He'll be upset if you disturb him
+My boss thinks I'm lazy 
+He'll get upset if you leave early
+He'll hate you if you do that 
+When I present, everyone is judging me
+The boss is in a foul mood today 
+You can see how effective NLP is
+You know this isn't working 
+I know you're enjoying this
+`,
+
+"Cause and Effect":
+`
+He makes me cringe just by speaking
+Because of you I feel worthless
+This exercise will inspire me
+I'm unhappy when he goes away
+If I stay in this job I have to work harder
+If you want a pay rise you have to stay late
+If I do that I'll get into trouble
+My boss makes me angry
+If you do that I'll leave
+I feel tense as soon as speaks
+They restrict my enthusiasm
+I can't relax without music
+If you want success you have to give up your home life
+We can't do that because he won't listen
+
+If I do the presentation it will go badly
+There's no point trying, he won't listen
+I won't apply, they'll never give me the job
+Things always go wrong when she walks in here
+`,
+
+"Presupposition":
+`
+What are we going to do next?
+When this plan falls I'll say ‘told you so'
+It will be easier when he leaves
+What will the next reorganization bring?
+When are you leaving?
+Who are you going to fire next?
+You'll enjoy it once you do it
+Once you make a start you'll find it easy
+We can't buy a car because we don't have any cash
+I'll be so happy when he gets found out
+I can't go for lunch with you because I'm going to a customer meeting
+I can't go home – my boss won't like it
+I can't learn to use this properly because I don't have enough time
+What's going to go wrong next?
+I'm just waiting for a bus
+We won't be late – we can get a taxi
+I'll be happy when this is all over
+`,
+
+"Universal Quantifiers":
+`
+He never listens to me
+Nobody likes me 
+He always tells the truth
+All companies are greedy 
+No one cares any more
+It's always the honest people that love 
+Nobody is having any fun these days
+Nothings the same anymore 
+All the competition exaggerates
+Nothing works here 
+I'll never be able to get fit
+Everybody's talking about it 
+They always have an excuse
+American's can express themselves 
+Everybody works too hard
+Sales people can never be trusted
+NLP practitioners are always healthy
+`,
+
+"Modal Operator of Necessity":
+`
+I have to take care of her
+We shouldn't do that
+You have to get a good education
+You must arrive on time
+You've got to laugh
+I must get a new car
+You always have to be dressed smartly
+You must be polite to the boss
+We have to get a break from work
+You must get that work done to day
+I mustn't leave yet
+You need an action plan
+You have to listen to the boss
+You ought to be more careful
+You shouldn't talk to that customer
+without asking me first
+This project must not fail
+You mustn't
+`,
+
+"Modal Operator of Possibility":
+`
+I can't tell the truth
+I can't go there now 
+I can't relax
+I can't ring that customer 
+I'll never be to able to learn this
+I won't be able to complete that on time
+I can't sleep
+I can't apply for that job 
+I couldn't possibly tell you
+I might not finish that report on time 
+I couldn't ask for a pay rise
+I can't imagine that 
+I can't concentrate on work at the moment
+I might just tell him that 
+I couldn't fire her
+I could do it if I tried 
+I might do what he says
+`
+}

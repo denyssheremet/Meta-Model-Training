@@ -1,0 +1,14 @@
+* {
+    background-color: aquamarine
+}
+
+#generalizationButtons, #distortionButtons, #deletionButtons {
+    display: inline-grid;
+    margin: 20px;
+}
+
+.mappingButton {
+    background-color: lightgreen;
+    display: block;
+    padding: 15px;
+}
