@@ -1,7 +1,8 @@
 
-var sentences = {
+var metaModelSentences = {
 
-    "Unspecified Noun":
+    "Unspecified Noun": {
+        examples:
         `
     I want a change
     It's terrible 
@@ -18,9 +19,10 @@ var sentences = {
     I need a new car
     Get the problem fixed 
     I read it in a magazine
-    `,
+    `},
 
-    "Unspecified Verb":
+    "Unspecified Verb": {
+        examples:
         `
     She rejected me
     I'm enjoying this
@@ -38,9 +40,10 @@ var sentences = {
     I'm running on empty
     At least he tries 
     Let's go!
-    `,
+    `},
 
-    "Nominalization":
+    "Nominalization": {
+        examples:
         `
     I want recognition
     We have made our decision 
@@ -59,9 +62,10 @@ var sentences = {
     Manufacturing has no future
     I want more direction 
     Decisions are hard
-    `,
+    `},
 
-    "Lack of Referential Index":
+    "Lack of Referential Index": {
+        examples:
         `
     They don't rate me
     The writing's on the wall 
@@ -80,9 +84,10 @@ var sentences = {
     We're all going to be made redundant
     They say you should do more exercise 
     If you can't beat them……
-    `,
+    `},
 
-    "Simple Deletion":
+    "Simple Deletion": {
+        examples:
         `
     I'm unhappy
     You can't Help me
@@ -100,9 +105,10 @@ var sentences = {
     He can't
     You must not do that 
     Stop it
-    `,
+    `},
 
-    "Comparative Deletion":
+    "Comparative Deletion": {
+        examples:
         `
     Our new product is more effective
     It's for the greater good 
@@ -121,9 +127,10 @@ var sentences = {
     This is getting much easier
     Blue is better 
     I'm enjoying this so much more
-    `,
+    `},
 
-    "Complex Equivalence":
+    "Complex Equivalence": {
+        examples:
         `
     He's silent…..He doesn't like what I've done
     A good relationship means never having to say sorry
@@ -138,9 +145,10 @@ var sentences = {
     This is the only way
     He doesn't know what I want because he doesn't care about me
     She goes down to the gym so she must be healthy
-    `,
+    `},
 
-    "Lost Comparative":
+    "Lost Comparative": {
+        examples:
         `
     it's disaster to be made redundant
     People make mistake 
@@ -161,9 +169,10 @@ var sentences = {
     A meeting has already been held about this
     People are more flexible these days 
     They've been at it again
-    `,
+    `},
 
-    "Mind Reading":
+    "Mind Reading": {
+        examples:
         `
     you don't rate me
     I know you don't believe me 
@@ -182,9 +191,10 @@ var sentences = {
     You can see how effective NLP is
     You know this isn't working 
     I know you're enjoying this
-    `,
+    `},
 
-    "Cause and Effect":
+    "Cause and Effect": {
+        examples:
         `
     He makes me cringe just by speaking
     Because of you I feel worthless
@@ -205,9 +215,10 @@ var sentences = {
     There's no point trying, he won't listen
     I won't apply, they'll never give me the job
     Things always go wrong when she walks in here
-    `,
+    `},
 
-    "Presupposition":
+    "Presupposition": {
+        examples:
         `
     What are we going to do next?
     When this plan falls I'll say ‘told you so'
@@ -226,9 +237,10 @@ var sentences = {
     I'm just waiting for a bus
     We won't be late – we can get a taxi
     I'll be happy when this is all over
-    `,
+    `},
 
-    "Universal Quantifiers":
+    "Universal Quantifiers": {
+        examples:
         `
     He never listens to me
     Nobody likes me 
@@ -247,9 +259,10 @@ var sentences = {
     Everybody works too hard
     Sales people can never be trusted
     NLP practitioners are always healthy
-    `,
+    `},
 
-    "Modal Operator of Necessity":
+    "Modal Operator of Necessity": {
+        examples:
         `
     I have to take care of her
     We shouldn't do that
@@ -269,9 +282,10 @@ var sentences = {
     without asking me first
     This project must not fail
     You mustn't
-    `,
+    `},
 
-    "Modal Operator of Possibility":
+    "Modal Operator of Possibility": {
+        examples:
         `
     I can't tell the truth
     I can't go there now 
@@ -290,20 +304,22 @@ var sentences = {
     I couldn't fire her
     I could do it if I tried 
     I might do what he says
-    `
+    `}
 }
+
+console.log(metaModelSentences);
 
 // Turn sentence strings into arrays
 var sentencesLength = 0;
-for (var [key, value] of Object.entries(sentences)) {
-    sentences[key] = value.split("\n").slice(1, -1);
+for (var [key, value] of Object.entries(metaModelSentences)) {
+    metaModelSentences[key].examples = value.examples.split("\n").slice(1, -1);
     // Trim spaces around sentences
-    for (let i = 0; i < sentences[key].length; i++) {
-        sentences[key][i] = sentences[key][i].trim();
+    for (let i = 0; i < metaModelSentences[key].examples.length; i++) {
+        metaModelSentences[key].examples[i] = metaModelSentences[key].examples[i].trim();
     }
-    sentencesLength += sentences[key].length;
+    sentencesLength += metaModelSentences[key].examples.length;
 }
-// sentences["size"] = sentencesLength;
-console.log(sentences["Modal Operator of Possibility"]);
-console.log(sentences.size);
+metaModelSentences["size"] = sentencesLength;
+console.log(metaModelSentences["Modal Operator of Possibility"]);
+console.log(metaModelSentences.size);
 
