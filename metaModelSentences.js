@@ -57,7 +57,7 @@ var metaModelSentences = {
     He's running the department badly 
     I like him
     This company is going places 
-    She always falls
+    She has failed
     I told him, now he should do it properly 
     I'm running on empty
     At least he tries 

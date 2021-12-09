@@ -22,9 +22,7 @@ function showDropdown() {
 }
 
 function answerChosen(answer) {
-    if (answer === currentMapping) {
-        alert("Correct Answer!");
-    } else {
+    if (answer !== currentMapping) {
         alert("Wrong Answer! \nCorrect answer: " + currentMapping);
     };
     chooseSentence();

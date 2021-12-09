@@ -16,6 +16,27 @@ The user sees a statement containing a Distortion, Deletion, or Generalization, 
 Meta Model Trainer 3 (Expert):
 The user sees a statement containing a Distortion, Deletion, or Generalization and a softener, and needs to formulate a Meta Model Question that includes the given softener.
 
+Enriched Language Training 1 (Beginner):
+The user sees a sentence or paragraph, and needs to determine the main used modalities. 
+
+Enriched Language Training 2 (Intermediate): 
+The user sees a statement and a modality, and needs to reformulate the statement to include the modality.
+
+Enriched Language Training 3 (Expert):
+The user sees a statement and 1, 2, or 3 submodalities, and needs to reformulate the statement to include all of the submodalities. 
+
+Milton Model Training 1 (Beginner):
+The user sees a statement that includes a Milton pattern, and he can choose which one it is.
+
+Milton Model Training 2 (Intermediate):
+The user sees a statement and a Milton Pattern, and needs to apply the pattern to the statement.
+
+Milton Model Training 3 (Advanced):
+The user sees a statement, and multiple Milton patterns. He needs to apply all patterns to the statement.
+
+Assumption Mastery Training:
+The user sees a statement, and needs to reformulate it as an assumption.
+
 TOTE Model Trainer:
 The user sees a statement, and needs to type questions to uncover the TOTE model.
 
@@ -28,15 +49,6 @@ The user gets a statement or idea, and needs to widen, narrow, or shift the fram
 
 Chunking the Frame Training: 
 The user gets a statement or idea, and needs to chunk the idea up, down, or laterally. 
-
-Enriched Language Training 1 (Beginner):
-The user sees a sentence or paragraph, and needs to determine the main used modalities. 
-
-Enriched Language Training 2 (Intermediate): 
-The user sees a statement and a modality, and needs to reformulate the statement to include the modality.
-
-Enriched Language Training 3 (Expert):
-The user sees a statement and 1, 2, or 3 submodalities, and needs to reformulate the statement to include all of the submodalities. 
 
 Meta Programs Training 1 (Beginner):
 The user sees a meta program or MBTI element, and needs to formulate a question to find out someone's meta program.
@@ -63,12 +75,6 @@ The user sees a statement on one of the levels, and needs to formulate a questio
 Levels of Intimacy / Dilts Logical Levels Training 3b (Expert): 
 The user sees a statement on one of the levels, and needs to formulate a statement about himself on the level above.
 (This can have a mode in which the statements start at the lowest levels, and slowly move up) 
-
-Milton Model Training:
-The user sees a statement and a Milton Pattern, and needs to apply the pattern to the statement.
-
-Assumption Mastery Training:
-The user sees a statement, and needs to reformulate it as an assumption.
 
 Clean Questions Training:
 The user sees a statement, and needs to formulate a type of Clean Question. 
