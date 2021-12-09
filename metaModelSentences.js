@@ -1,7 +1,7 @@
 
 var metaModelSentences = {
 
-    "Unspecified Noun": {
+    "Lack of Referential Index": {
         examples:
         `
     I want a change
@@ -19,6 +19,28 @@ var metaModelSentences = {
     I need a new car
     Get the problem fixed 
     I read it in a magazine
+    They don't rate me
+    The writing's on the wall 
+    People are stupid
+    They should know better 
+    It needs to be done properly
+    People make mistake 
+    Those people need to be disciplined
+    Those products are expensive 
+    One knows what's best
+    This happens everyday 
+    If you learn NLP you will become very rich
+    We shouldn't do that 
+    It's either them or us
+    You must turn your mobile off in the office 
+    We're all going to be made redundant
+    They say you should do more exercise 
+    Americans can express themselves 
+    If you can't beat them……
+    People eat food
+    Dutch people are better than Germans
+    We like to party
+    I like food
     `},
 
     "Unspecified Verb": {
@@ -62,29 +84,6 @@ var metaModelSentences = {
     Manufacturing has no future
     I want more direction 
     Decisions are hard
-    `},
-
-    "Lack of Referential Index": {
-        examples:
-        `
-    They don't rate me
-    The writing's on the wall 
-    People are stupid
-    They should know better 
-    It needs to be done properly
-    People make mistake 
-    Those people need to be disciplined
-    Those products are expensive 
-    One knows what's best
-    This happens everyday 
-    If you learn NLP you will become very rich
-    We shouldn't do that 
-    It's either them or us
-    You must turn your mobile off in the office 
-    We're all going to be made redundant
-    They say you should do more exercise 
-    Americans can express themselves 
-    If you can't beat them……
     `},
 
     "Simple Deletion": {
@@ -139,10 +138,10 @@ var metaModelSentences = {
     You can't have a well paid job that is enjoyable too
     If you want success you have to give up your home life
     That means trouble
-    He came in late on Saturday; I'm going to have to fire him
+    He came in late on Saturday; I'm going to have to fire him
     When you talk like that I know you don't mean it
     He wears the same colour shirt as the boss: that means he's in for promotion
-    I saw them down the pub together; they must be having an affair
+    I saw them down the pub together; they must be having an affair
     This is the only way
     He doesn't know what I want because he doesn't care about me
     She goes down to the gym so she must be healthy
@@ -211,7 +210,6 @@ var metaModelSentences = {
     I can't relax without music
     If you want success you have to give up your home life
     We can't do that because he won't listen
-    
     If I do the presentation it will go badly
     There's no point trying, he won't listen
     I won't apply, they'll never give me the job
@@ -222,7 +220,7 @@ var metaModelSentences = {
         examples:
         `
     What are we going to do next?
-    When this plan falls I'll say ‘told you so'
+    When this plan falls I'll say 'told you so'
     It will be easier when he leaves
     What will the next reorganization bring?
     When are you leaving?
@@ -232,11 +230,9 @@ var metaModelSentences = {
     We can't buy a car because we don't have any cash
     I'll be so happy when he gets found out
     I can't go for lunch with you because I'm going to a customer meeting
-    I can't go home – my boss won't like it
     I can't learn to use this properly because I don't have enough time
     What's going to go wrong next?
     I'm just waiting for a bus
-    We won't be late – we can get a taxi
     I'll be happy when this is all over
     `},
 
@@ -307,8 +303,6 @@ var metaModelSentences = {
     `}
 }
 
-console.log(metaModelSentences);
-
 // Turn sentence strings into arrays
 var sentencesLength = 0;
 for (var [key, value] of Object.entries(metaModelSentences)) {
@@ -320,6 +314,3 @@ for (var [key, value] of Object.entries(metaModelSentences)) {
     sentencesLength += metaModelSentences[key].examples.length;
 }
 metaModelSentences["size"] = sentencesLength;
-console.log(metaModelSentences["Modal Operator of Possibility"]);
-console.log(metaModelSentences.size);
-
