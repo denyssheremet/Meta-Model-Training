@@ -41,6 +41,12 @@ var enrichedLanguageSentences = {
     `,
 };
 
+var modalities = {
+    visual: ["association", "size", "motion", "colour", "brightness", "distance", "focus", "clarity", "location"],
+    audio: ["location", "tonality", "tempo", "pitch", "intensity", "clarity", "volume", "rhythm"],
+    kinesthetic: [ "location", "vibration", "movement", "pressure", "shape", "size", "temperature", "direction", "steadiness", "taste", "smell"],
+}
+
 
 for (var [key, value] of Object.entries(enrichedLanguageSentences)) {
     enrichedLanguageSentences[key] = value.split("\n").slice(1, -1);

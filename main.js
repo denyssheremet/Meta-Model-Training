@@ -12,10 +12,10 @@ var activeMappings = [...mappings];
 
 function showDropdown() {
     if (dropdownShowing) {
-        document.getElementById("myDropdown").style.display = "none";
+        document.getElementById("selectionDropdown").style.display = "none";
         chooseSentence();
     } else {
-        document.getElementById("myDropdown").style.display = "block";
+        document.getElementById("selectionDropdown").style.display = "block";
         document.getElementById("sentence").innerHTML = "";
     }
     dropdownShowing = !dropdownShowing;
@@ -50,6 +50,18 @@ function selectMappings(selectedMapping) {
     };
 }
 
+function makeDiv(divName, appendTo) {
+    let div = document.createElement("div");
+    div.id = divName;
+    document.getElementById(appendTo).appendChild(div);
+}
+
+function makeH2(innerHTML, appendTo) {
+    let h2 = document.createElement("h2");
+    h2.innerHTML = innerHTML;
+    document.getElementById(appendTo).appendChild(h2);
+}
+
 function makeAnswerButton(name, appendTo) {
     let btn = document.createElement("button");
     btn.id = "answer:" + name;
@@ -69,16 +81,31 @@ function makeDropdownButton(name, appendTo) {
 }
 
 window.addEventListener("load", function () {
+    document.getElementById("title").innerHTML = "Meta Model Trainer 1 (Beginner)";
+
+    var h2 = document.createElement("h2");
+    h2.id = "sentence";
+    document.getElementById("topDiv").appendChild(h2);
+
 
     // generate Buttons for different answers
+    makeDiv("deletionButtons", "bottomDiv", "Deletion");
+    makeH2("Deletions", "deletionButtons");
+    makeDiv("deletionDropdown", "selectionDropdown", "");
     for (let i = 0; i < deletions.length; i++) {
         makeAnswerButton(deletions[i], "deletionButtons");
         makeDropdownButton(deletions[i], "deletionDropdown");
     }
+    makeDiv("distortionButtons", "bottomDiv", "Distortion");
+    makeH2("Distortions", "distortionButtons");
+    makeDiv("distortionDropdown", "selectionDropdown", "");
     for (let i = 0; i < distortions.length; i++) {
         makeAnswerButton(distortions[i], "distortionButtons");
         makeDropdownButton(distortions[i], "distortionDropdown");
     }
+    makeDiv("generalizationButtons", "bottomDiv", "Generalization");
+    makeH2("Generalizations", "generalizationButtons");
+    makeDiv("generalizationDropdown", "selectionDropdown", "");
     for (let i = 0; i < generalizations.length; i++) {
         makeAnswerButton(generalizations[i], "generalizationButtons");
         makeDropdownButton(generalizations[i], "generalizationDropdown");
