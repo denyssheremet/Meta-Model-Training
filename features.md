@@ -17,12 +17,9 @@ Meta Model Trainer 3 (Expert):
 The user sees a statement containing a Distortion, Deletion, or Generalization and a softener, and needs to formulate a Meta Model Question that includes the given softener.
 
 Enriched Language Training 1 (Beginner):
-The user sees a sentence or paragraph, and needs to determine the main used modalities. 
+The user sees a sentence or paragraph, and needs to determine the main modality. 
 
-Enriched Language Training 2 (Intermediate): 
-The user sees a statement and a modality, and needs to reformulate the statement to include the modality.
-
-Enriched Language Training 3 (Expert):
+Enriched Language Training 2 (Expert):
 The user sees a statement and 1, 2, or 3 submodalities, and needs to reformulate the statement to include all of the submodalities. 
 
 Milton Model Training 1 (Beginner):
@@ -81,6 +78,9 @@ The user sees a statement on one of the levels, and needs to formulate a questio
 Levels of Intimacy / Dilts Logical Levels Training 3b (Expert): 
 The user sees a statement on one of the levels, and needs to formulate a statement about himself on the level above.
 (This can have a mode in which the statements start at the lowest levels, and slowly move up) 
+
+Ladder of Inference Training: 
+Reference: https://www.skillsyouneed.com/ips/ladder-of-inference.html
 
 Clean Questions Training:
 The user sees a statement, and needs to formulate a type of Clean Question. 
