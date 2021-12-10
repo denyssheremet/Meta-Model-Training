@@ -85,6 +85,15 @@ The user sees a statement on one of the levels, and needs to formulate a stateme
 Clean Questions Training:
 The user sees a statement, and needs to formulate a type of Clean Question. 
 
+Body Language Training 1 (Beginner):
+The user sees a video of a speaker, and submodalities from one modality. When the video is over, the user needs to imitate the speaker in that modality. 
+
+Body Language Training 2 (Advanced):
+The user sees a video of a speaker, and 1, 2 or 3 questions about his modalities, meta programs, eye accesing, autonomic nervous system. The user needs to look and listen to the speaker closely and answer those questions. 
+
+Body Language Training 3 (Expert):
+The user sees a video of a speaker, and 1, 2 or 3 questions about his modalities, meta programs, eye accesing, autonomic nervous system. The user needs to look and listen to the speaker closely and when the video ends, continue talking while mirroring the speaker.
+
 Provocative Coaching Training 1 (Beginner): 
 The user sees an example of an provocative coaching technique, and needs to choose which one was being used. 
 
@@ -107,4 +116,4 @@ Coaching Training 2 (Intermediate):
 One user sees a problem in a particular form. The other user needs to find the appropriate form or model for solving the problem and use it. 
 
 Coaching Training 3 (Expert):
-One user sees a problem in a particular form, a modality, and 3 or 4 meta models. The other user needs to find out and help solve the problem, using the appropriate technology, modality and meta models. 
+One user sees a problem in a particular form, a modality, and 3 or 4 meta programs. The other user needs to find out and help solve the problem, using the appropriate technology, modality and meta programs. 

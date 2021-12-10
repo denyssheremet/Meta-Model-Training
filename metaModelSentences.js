@@ -260,46 +260,45 @@ var metaModelSentences = {
     "Modal Operator of Necessity": {
         examples:
         `
-    I have to take care of her
-    We shouldn't do that
-    You have to get a good education
-    You must arrive on time
-    You've got to laugh
-    I must get a new car
-    You always have to be dressed smartly
-    You must be polite to the boss
-    We have to get a break from work
-    You must get that work done to day
-    I mustn't leave yet
-    You need an action plan
-    You have to listen to the boss
-    You ought to be more careful
-    You shouldn't talk to that customer
-    without asking me first
-    This project must not fail
-    You mustn't
+    I have to take care of her by feeding her grapes
+    You and I shouldn't play tennis now
+    You have to educate yourself well about how language works
+    You must arrive on time for tomorrow's meeting about plant intelligence
+    You've got to laugh when you watch this video
+    I must buy a new Tesla Model X from you right now
+    You have to dress yourself in a tuxedo for event X tonight
+    You must be polite to boss Eric by giving him a pat on the back now
+    I have to drive this train until 20:00
+    You must brush your teeth today
+    I mustn't leave this appartment yet
+    You need to make a strategy about how you are going to get to your home from here now
+    You have to sit on the chair next to Harry now 
+    You ought to care more about whether Liverpool wins the Champions League Final this season
+    You shouldn't talk to Harry about his dog today
+    This project must not fail to plant a tree in our garden before midnight
+    You mustn't read this sentence right now
     `},
 
     "Modal Operator of Possibility": {
         examples:
         `
-    I can't tell the truth
-    I can't go there now 
-    I can't relax
-    I can't ring that customer 
-    I'll never be to able to learn this
-    I won't be able to complete that on time
-    I can't sleep
-    I can't apply for that job 
-    I couldn't possibly tell you
-    I might not finish that report on time 
-    I couldn't ask for a pay rise
-    I can't imagine that 
-    I can't concentrate on work at the moment
-    I might just tell him that 
-    I couldn't fire her
-    I could do it if I tried 
-    I might do what he says
+    I can't tell you the truth about what my given name is
+    I can't go to your place now 
+    I can't relax my right leg
+    I can't call Eric now 
+    I'll never be to able to learn how to tie my shoes
+    I won't be able to complete project X before the deadline tomorrow
+    I can't sleep now
+    I can't apply for job X
+    I couldn't possibly tell you what my real name is now
+    I might not finish report X before 15:00 today 
+    Today, I couldn't ask Jennie to raise my pay 5%
+    I can't imagine that you showered with cold water today
+    I can't concentrate on working on my job at the moment
+    Tomorrow, I might just tell him that I stole his Apple watch
+    I couldn't fire her from her current position
+    I could eat an apple if I tried 
+    I might do what he says I should do at 19:00
     `}
 }
 
