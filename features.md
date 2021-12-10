@@ -44,10 +44,10 @@ Reframing Training 1 (Beginner):
 The user sees a reframe, and needs to choose which type it is. 
 
 Reframing Training 2 (Intermediate):
-The user sees a statement, and needs to choose which direction would be appropriate to reframe.
+The user sees a problem statement, and needs to choose in which direction it would be most appropriate to reframe.
 
 Reframing Training 3 (Expert):
-The user sees a statement, and needs to find the appropriate way of reframing, and reframe into that direction 1, 2, or 3 times.
+The user sees a problem statement, and needs to find the appropriate way of reframing, pace the problem statement if appropriate, and reframe into the chosen direction in 1, 2, or 3 different ways.
 Reference: Sleight of Mouth and Mind Lines
 
 Shifting the Frame Training: 
