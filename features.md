@@ -40,8 +40,14 @@ The user sees a statement, and needs to reformulate it as an assumption.
 TOTE Model Trainer:
 The user sees a statement, and needs to type questions to uncover the TOTE model.
 
-Reframing Training:
-The user sees a statement, and a direction / reframing technique, and needs to reframe the statement towards that direction or using that technique. 
+Reframing Training 1 (Beginner):
+The user sees a reframe, and needs to choose which type it is. 
+
+Reframing Training 2 (Intermediate):
+The user sees a statement, and needs to choose which direction would be appropriate to reframe.
+
+Reframing Training 3 (Expert):
+The user sees a statement, and needs to find the appropriate way of reframing, and reframe into that direction 1, 2, or 3 times.
 Reference: Sleight of Mouth and Mind Lines
 
 Shifting the Frame Training: 
@@ -79,8 +85,11 @@ The user sees a statement on one of the levels, and needs to formulate a stateme
 Clean Questions Training:
 The user sees a statement, and needs to formulate a type of Clean Question. 
 
-Provocative Coaching Training: 
-TBD
+Provocative Coaching Training 1 (Beginner): 
+The user sees an example of an provocative coaching technique, and needs to choose which one was being used. 
+
+Provocative Coaching Training 2 (Intermediate): 
+User sees a problem, and a provocative coaching technique. Then the user needs to write out how to apply the technique to the problem. 
 Reference: https://happyrubin.com/nlp/provocative-coaching/
 
 Pattern Interrupt Training: 
@@ -90,3 +99,12 @@ Reference: https://happyrubin.com/nlp/breaking-patterns/
 NLP Presuppositions Training:
 The user sees a statement, and has to say which NLP presupposition it breaks.
 
+Coaching Training 1 (Beginner): 
+The user sees a problem in a particular form, and needs to choose the appropriate form or model for solving the problem. 
+E.g.: context reframe, meaning reframe, negotiation between parts, ..., open questions, ...
+
+Coaching Training 2 (Intermediate):
+One user sees a problem in a particular form. The other user needs to find the appropriate form or model for solving the problem and use it. 
+
+Coaching Training 3 (Expert):
+One user sees a problem in a particular form, a modality, and 3 or 4 meta models. The other user needs to find out and help solve the problem, using the appropriate technology, modality and meta models. 
