@@ -63,7 +63,7 @@ Meta Programs Training 2 (Intermediate):
 The user sees a sentence or paragraph, and needs to select which meta programs can be deducted from it. 
 
 Meta Programs Training 3 (Expert):
-The user sees a statement and a list of 1, 2, or 3 meta programs, and needs to rephrase the statement to suit those meta programs. 
+The user sees a statement, job offer, or product offer, and a list of 1, 2, or 3 meta programs, and needs to rephrase the statement to suit those meta programs. 
 
 Levels of Intimacy / Dilts Logical Levels Training 1 (Beginner): 
 The user sees a statement or question in one of the levels and needs to choose the level at which the statement is. 
