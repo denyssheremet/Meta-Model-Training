@@ -10,7 +10,13 @@
 
 <body>
     <h5 id="title"></h5>
-    <button>Choose Training</button>
+    <div class="chooseTraining">
+        <button onclick="showTrainings()" class="dropbtn">Choose Training</button>
+        <div id="trainingDropdown" class="dropdown-content">
+            <button onclick="selectTraining('MMT1')">MMT 1</button>
+            <button onclick="selectTraining('ELT1')">ELT 1</button>
+        </div>
+    </div>
     <div class="dropdown">
         <button onclick="showDropdown()" class="dropbtn">Dropdown</button>
         <div id="selectionDropdown" class="dropdown-content"> </div>

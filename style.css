@@ -3,6 +3,12 @@
     color: white;
 }
 
+textarea {
+    width: -webkit-fill-available;
+    margin: 20px;
+    margin-top: 50px;
+}
+
 #generalizationButtons, #distortionButtons, #deletionButtons {
     display: inline-grid;
     margin: 20px;
@@ -59,6 +65,10 @@
     color: lightgoldenrodyellow;
     font-weight: bold;
     padding: 15px;
+}
+
+#trainingDropdown {
+    display: none;
 }
 
 .dropdown a:hover {

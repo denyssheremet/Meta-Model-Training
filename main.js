@@ -6,6 +6,7 @@ const mappings = deletions.concat(distortions, generalizations);
 var currentSentence = "";
 var currentMapping = "";
 
+var trainingDropdownOpen = false;
 var dropdownShowing = false;
 var activeMappings = [...mappings];
 
@@ -35,7 +36,7 @@ function chooseSentence() {
 };
 
 function selectMappings(selectedMapping) {
-    var index = activeMappings.indexOf(selectedMapping);
+    let index = activeMappings.indexOf(selectedMapping);
 
     if (index != -1) {
         document.getElementById("dropdown:" + selectedMapping).style.color = "#1a1a1a";
@@ -56,9 +57,10 @@ function makeDiv(divName, appendTo) {
     document.getElementById(appendTo).appendChild(div);
 }
 
-function makeH2(innerHTML, appendTo) {
+function makeH2(innerHTML, appendTo, id="") {
     let h2 = document.createElement("h2");
     h2.innerHTML = innerHTML;
+    h2.id = id;
     document.getElementById(appendTo).appendChild(h2);
 }
 
@@ -80,12 +82,17 @@ function makeDropdownButton(name, appendTo) {
     document.getElementById(appendTo).appendChild(btn);
 }
 
-window.addEventListener("load", function () {
-    document.getElementById("title").innerHTML = "Meta Model Trainer 1 (Beginner)";
+function makeTextArea(id, appendTo) {
+    let ta = document.createElement("textarea");
+    ta.id = id;
+    document.getElementById(appendTo).appendChild(ta);
+};
 
-    var h2 = document.createElement("h2");
-    h2.id = "sentence";
-    document.getElementById("topDiv").appendChild(h2);
+// starts Meta Model Trainer 1
+function startMetaModelTrainer1() {
+    clearIndex();
+    document.getElementById("title").innerHTML = "Meta Model Trainer 1 (Beginner)";
+    makeH2("", "topDiv", "sentence");
 
 
     // generate Buttons for different answers
@@ -111,4 +118,43 @@ window.addEventListener("load", function () {
         makeDropdownButton(generalizations[i], "generalizationDropdown");
     }
     chooseSentence();
+};
+
+function startEnrichedLanguageTrainer1() {
+    document.getElementById("title").innerHTML = "Enriched Language Trainer 1 (Beginner)";
+    makeH2("Example Submodality", "topDiv", "sentence");
+    makeTextArea("textarea", "bottomDiv");
+};
+
+// Clears index.html so another Trainer can be started.
+function clearIndex() {
+    document.getElementById("topDiv").innerHTML = "";
+    document.getElementById("bottomDiv").innerHTML = "";
+    document.getElementById("title").innerHTML = "";
+};
+
+function showTrainings() {
+    if (trainingDropdownOpen) {
+        document.getElementById("trainingDropdown").style.display = "none";
+    } else {
+        document.getElementById("trainingDropdown").style.display = "grid";
+    }
+    trainingDropdownOpen = !trainingDropdownOpen;
+};
+
+function selectTraining(trainingCode) {
+    showTrainings();
+    clearIndex();
+    switch (trainingCode) {
+        case "MMT1": startMetaModelTrainer1();
+        break;
+        case "ELT1": startEnrichedLanguageTrainer1();
+        break;
+    }
+}
+
+window.addEventListener("load", function () {
+    startEnrichedLanguageTrainer1();
+    // startMetaModelTrainer1();
 });
+

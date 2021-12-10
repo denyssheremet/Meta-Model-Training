@@ -36,7 +36,7 @@ var metaModelSentences = {
     We're all going to be made redundant
     They say you should do more exercise 
     Americans can express themselves 
-    If you can't beat them……
+    If you can't beat them....
     People eat food
     Dutch people are better than Germans
     We like to party
