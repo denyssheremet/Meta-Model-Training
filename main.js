@@ -4,7 +4,9 @@ const generalizations = ["Universal Quantifiers", "Modal Operator of Necessity",
 const mappings = deletions.concat(distortions, generalizations);
 
 var currentSentence = "";
-var currentMapping = "";
+var correctAnswer = "";
+
+var currentMod = "";
 
 var trainingDropdownOpen = false;
 var dropdownShowing = false;
@@ -23,15 +25,14 @@ function showDropdown() {
 }
 
 function answerChosen(answer) {
-    if (answer !== currentMapping) {
-        alert("Wrong Answer! \nCorrect answer: " + currentMapping);
+    if (answer !== correctAnswer) {
+        alert("Correct answer: " + correctAnswer);
     };
-    chooseSentence();
 };
 
 function chooseSentence() {
-    currentMapping = activeMappings[Math.floor(Math.random() * activeMappings.length)];
-    currentSentence = metaModelSentences[currentMapping].examples[Math.floor(Math.random() * metaModelSentences[currentMapping].examples.length)]
+    correctAnswer = activeMappings[Math.floor(Math.random() * activeMappings.length)];
+    currentSentence = metaModelSentences[correctAnswer].examples[Math.floor(Math.random() * metaModelSentences[correctAnswer].examples.length)]
     document.getElementById("sentence").innerHTML = currentSentence;
 };
 
@@ -71,12 +72,12 @@ function makeH3(innerHTML, appendTo, id = "") {
     document.getElementById(appendTo).appendChild(h3);
 }
 
-function makeAnswerButton(name, appendTo) {
+function makeAnswerButton(name, appendTo, func) {
     let btn = document.createElement("button");
     btn.id = "answer:" + name;
     btn.innerHTML = name;
-    btn.className = "mappingButton";
-    btn.onclick = function () { answerChosen(name); };
+    btn.className = "answerButton";
+    btn.onclick = func;
     document.getElementById(appendTo).appendChild(btn);
 }
 
@@ -140,6 +141,15 @@ function getRandSentence(listFrom) {
     document.getElementById("sentence").innerHTML = listFrom[Math.floor(Math.random() * activeMappings.length)];
 }
 
+// chooses a random enriched sentence, and appends it to document.getElementById("sentence")
+function chooseRandEnrichedSentence() {
+    let randMod = randFromList(Object.keys(enrichedLanguageSentences), 1)[0];
+    correctAnswer = randMod;
+    let randES = randFromList(enrichedLanguageSentences[randMod], 1)[0];
+
+    document.getElementById("sentence").innerHTML = randES;
+};
+
 // starts Meta Model Trainer 1
 function startMetaModelTrainer1() {
     clearIndex();
@@ -152,21 +162,21 @@ function startMetaModelTrainer1() {
     makeH2("Deletions", "deletionButtons");
     makeDiv("deletionDropdown", "selectionDropdown", "");
     for (let i = 0; i < deletions.length; i++) {
-        makeAnswerButton(deletions[i], "deletionButtons");
+        makeAnswerButton(deletions[i], "deletionButtons", function () { answerChosen(deletions[i]); chooseSentence();});
         makeDropdownButton(deletions[i], "deletionDropdown");
     }
     makeDiv("distortionButtons", "bottomDiv", "Distortion");
     makeH2("Distortions", "distortionButtons");
     makeDiv("distortionDropdown", "selectionDropdown", "");
     for (let i = 0; i < distortions.length; i++) {
-        makeAnswerButton(distortions[i], "distortionButtons");
+        makeAnswerButton(distortions[i], "distortionButtons", function () { answerChosen(distortions[i]); chooseSentence();});
         makeDropdownButton(distortions[i], "distortionDropdown");
     }
     makeDiv("generalizationButtons", "bottomDiv", "Generalization");
     makeH2("Generalizations", "generalizationButtons");
     makeDiv("generalizationDropdown", "selectionDropdown", "");
     for (let i = 0; i < generalizations.length; i++) {
-        makeAnswerButton(generalizations[i], "generalizationButtons");
+        makeAnswerButton(generalizations[i], "generalizationButtons", function () { answerChosen(generalizations[i]); chooseSentence();});
         makeDropdownButton(generalizations[i], "generalizationDropdown");
     }
     chooseSentence();
@@ -174,7 +184,20 @@ function startMetaModelTrainer1() {
 
 function startEnrichedLanguageTrainer1() {
     document.getElementById("title").innerHTML = "Enriched Language Trainer 1 (Beginner)";
-    makeH2("Here is a sentence", "topDiv", "sentence");
+    document.getElementById("bottomDiv").style.display = "flex";
+    document.getElementById("bottomDiv").style.margin = "100px";
+    makeH2("", "topDiv", "sentence");
+    chooseRandEnrichedSentence();
+
+    makeAnswerButton("Visual", "bottomDiv", function () { answerChosen("visual"); chooseRandEnrichedSentence();})
+    makeAnswerButton("Audio", "bottomDiv", function () { answerChosen("audio"); chooseRandEnrichedSentence();})
+    makeAnswerButton("Kinesthetic", "bottomDiv", function () { answerChosen("kinesthetic"); chooseRandEnrichedSentence();})
+
+}
+
+function startEnrichedLanguageTrainer2() {
+    document.getElementById("title").innerHTML = "Enriched Language Trainer 2 (Advanced)";
+    makeH2("", "topDiv", "sentence");
     makeH3("", "topDiv", "submods");
     makeTextArea("textarea", "bottomDiv");
 
@@ -216,6 +239,8 @@ function selectTraining(trainingCode) {
         case "MMT1": startMetaModelTrainer1();
             break;
         case "ELT1": startEnrichedLanguageTrainer1();
+            break;
+        case "ELT2": startEnrichedLanguageTrainer2();
             break;
     }
 }
