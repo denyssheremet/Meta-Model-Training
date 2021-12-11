@@ -53,14 +53,13 @@ function selectMappings(choice) {
             activeMappings = deletions.concat(distortions, generalizations);
             break;
     }
+    showDropdown();
 
     // make buttons selected or unselected
     let allDropdownButtons = document.getElementsByClassName("dropdownButton");
     let selectedDropdownButtons = document.getElementsByClassName("dropdown:" + dropdownOptionSelected);
     let allAnswerButtons = document.getElementsByClassName("answerButton");
     let selectedAnswerButtons = document.getElementsByClassName("answer:" + dropdownOptionSelected);
-
-    console.log(selectedDropdownButtons);
 
     //make all answer- and dropdown buttons invisible
     for (let i = 0; i < allAnswerButtons.length; i++) {
