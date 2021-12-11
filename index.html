@@ -3,24 +3,30 @@
 
 <head>
     <script src="metaModelSentences.js"></script>
+    <script src="enrichedLanguageSentences.js"></script>
     <script src="main.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h5>Meta Model Trainer 1 (Beginner)</h5>
-    <button>Choose Training</button>
+    <h5 id="title"></h5>
+    <div class="chooseTraining">
+        <button onclick="showTrainings()" class="dropbtn">Choose Training</button>
+        <div id="trainingDropdown" class="dropdown-content">
+            <button onclick="selectTraining('MMT1')">MMT 1</button>
+            <button onclick="selectTraining('ELT1')">ELT 1</button>
+            <button onclick="selectTraining('ELT2')">ELT 2</button>
+        </div>
+    </div>
+    <div class="dropdown">
+        <button onclick="showDropdown()" class="dropbtn">Dropdown</button>
+        <div id="selectionDropdown" class="dropdown-content"> </div>
+    </div>
 
-    <div id="answerButtons">
-        <div id="deletionButtons">
-            <h2>Deletion</h2>
-        </div>
-        <div id="distortionButtons">
-            <h2>Distortion</h2>
-        </div>
-        <div id="generalizationButtons">
-            <h2>Generalization</h2>
-        </div>
+    <div id="topDiv">
+    </div>
+
+    <div id="bottomDiv">
     </div>
 </body>
 

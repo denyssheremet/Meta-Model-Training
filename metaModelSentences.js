@@ -1,7 +1,8 @@
 
-var sentences = {
+var metaModelSentences = {
 
-    "Unspecified Noun":
+    "Lack of Referential Index": {
+        examples:
         `
     I want a change
     It's terrible 
@@ -18,9 +19,32 @@ var sentences = {
     I need a new car
     Get the problem fixed 
     I read it in a magazine
-    `,
+    They don't rate me
+    The writing's on the wall 
+    People are stupid
+    They should know better 
+    It needs to be done properly
+    People make mistake 
+    Those people need to be disciplined
+    Those products are expensive 
+    One knows what's best
+    This happens everyday 
+    If you learn NLP you will become very rich
+    We shouldn't do that 
+    It's either them or us
+    You must turn your mobile off in the office 
+    We're all going to be made redundant
+    They say you should do more exercise 
+    Americans can express themselves 
+    If you can't beat them....
+    People eat food
+    Dutch people are better than Germans
+    We like to party
+    I like food
+    `},
 
-    "Unspecified Verb":
+    "Unspecified Verb": {
+        examples:
         `
     She rejected me
     I'm enjoying this
@@ -33,14 +57,15 @@ var sentences = {
     He's running the department badly 
     I like him
     This company is going places 
-    She always falls
+    She has failed
     I told him, now he should do it properly 
     I'm running on empty
     At least he tries 
     Let's go!
-    `,
+    `},
 
-    "Nominalization":
+    "Nominalization": {
+        examples:
         `
     I want recognition
     We have made our decision 
@@ -59,30 +84,10 @@ var sentences = {
     Manufacturing has no future
     I want more direction 
     Decisions are hard
-    `,
+    `},
 
-    "Lack of Referential Index":
-        `
-    They don't rate me
-    The writing's on the wall 
-    People are stupid
-    They should know better 
-    It needs to be done properly
-    People make mistake 
-    Those people need to be disciplined
-    Those products are expensive 
-    One knows what's best
-    This happens everyday 
-    If you learn NLP you will become very rich
-    We shouldn't do that 
-    It's either them or us
-    You must turn your mobile off in the office 
-    We're all going to be made redundant
-    They say you should do more exercise 
-    If you can't beat them……
-    `,
-
-    "Simple Deletion":
+    "Simple Deletion": {
+        examples:
         `
     I'm unhappy
     You can't Help me
@@ -100,9 +105,10 @@ var sentences = {
     He can't
     You must not do that 
     Stop it
-    `,
+    `},
 
-    "Comparative Deletion":
+    "Comparative Deletion": {
+        examples:
         `
     Our new product is more effective
     It's for the greater good 
@@ -121,9 +127,10 @@ var sentences = {
     This is getting much easier
     Blue is better 
     I'm enjoying this so much more
-    `,
+    `},
 
-    "Complex Equivalence":
+    "Complex Equivalence": {
+        examples:
         `
     He's silent…..He doesn't like what I've done
     A good relationship means never having to say sorry
@@ -131,16 +138,17 @@ var sentences = {
     You can't have a well paid job that is enjoyable too
     If you want success you have to give up your home life
     That means trouble
-    He came in late on Saturday; I'm going to have to fire him
+    He came in late on Saturday; I'm going to have to fire him
     When you talk like that I know you don't mean it
     He wears the same colour shirt as the boss: that means he's in for promotion
-    I saw them down the pub together; they must be having an affair
+    I saw them down the pub together; they must be having an affair
     This is the only way
     He doesn't know what I want because he doesn't care about me
     She goes down to the gym so she must be healthy
-    `,
+    `},
 
-    "Lost Comparative":
+    "Lost Comparative": {
+        examples:
         `
     it's disaster to be made redundant
     People make mistake 
@@ -161,9 +169,10 @@ var sentences = {
     A meeting has already been held about this
     People are more flexible these days 
     They've been at it again
-    `,
+    `},
 
-    "Mind Reading":
+    "Mind Reading": {
+        examples:
         `
     you don't rate me
     I know you don't believe me 
@@ -182,16 +191,17 @@ var sentences = {
     You can see how effective NLP is
     You know this isn't working 
     I know you're enjoying this
-    `,
+    `},
 
-    "Cause and Effect":
+    "Cause and Effect": {
+        examples:
         `
     He makes me cringe just by speaking
     Because of you I feel worthless
     This exercise will inspire me
     I'm unhappy when he goes away
     If I stay in this job I have to work harder
-    If you want a pay rise you have to stay late
+    If you want a pay raise you have to stay late
     If I do that I'll get into trouble
     My boss makes me angry
     If you do that I'll leave
@@ -200,17 +210,17 @@ var sentences = {
     I can't relax without music
     If you want success you have to give up your home life
     We can't do that because he won't listen
-    
     If I do the presentation it will go badly
     There's no point trying, he won't listen
     I won't apply, they'll never give me the job
     Things always go wrong when she walks in here
-    `,
+    `},
 
-    "Presupposition":
+    "Presupposition": {
+        examples:
         `
     What are we going to do next?
-    When this plan falls I'll say ‘told you so'
+    When this plan falls I'll say 'told you so'
     It will be easier when he leaves
     What will the next reorganization bring?
     When are you leaving?
@@ -220,15 +230,14 @@ var sentences = {
     We can't buy a car because we don't have any cash
     I'll be so happy when he gets found out
     I can't go for lunch with you because I'm going to a customer meeting
-    I can't go home – my boss won't like it
     I can't learn to use this properly because I don't have enough time
     What's going to go wrong next?
     I'm just waiting for a bus
-    We won't be late – we can get a taxi
     I'll be happy when this is all over
-    `,
+    `},
 
-    "Universal Quantifiers":
+    "Universal Quantifiers": {
+        examples:
         `
     He never listens to me
     Nobody likes me 
@@ -243,67 +252,64 @@ var sentences = {
     I'll never be able to get fit
     Everybody's talking about it 
     They always have an excuse
-    American's can express themselves 
     Everybody works too hard
     Sales people can never be trusted
     NLP practitioners are always healthy
-    `,
+    `},
 
-    "Modal Operator of Necessity":
+    "Modal Operator of Necessity": {
+        examples:
         `
-    I have to take care of her
-    We shouldn't do that
-    You have to get a good education
-    You must arrive on time
-    You've got to laugh
-    I must get a new car
-    You always have to be dressed smartly
-    You must be polite to the boss
-    We have to get a break from work
-    You must get that work done to day
-    I mustn't leave yet
-    You need an action plan
-    You have to listen to the boss
-    You ought to be more careful
-    You shouldn't talk to that customer
-    without asking me first
-    This project must not fail
-    You mustn't
-    `,
+    I have to take care of her by feeding her grapes
+    You and I shouldn't play tennis now
+    You have to educate yourself well about how language works
+    You must arrive on time for tomorrow's meeting about plant intelligence
+    You've got to laugh when you watch this video
+    I must buy a new Tesla Model X from you right now
+    You have to dress yourself in a tuxedo for event X tonight
+    You must be polite to boss Eric by giving him a pat on the back now
+    I have to drive this train until 20:00
+    You must brush your teeth today
+    I mustn't leave this appartment yet
+    You need to make a strategy about how you are going to get to your home from here now
+    You have to sit on the chair next to Harry now 
+    You ought to care more about whether Liverpool wins the Champions League Final this season
+    You shouldn't talk to Harry about his dog today
+    This project must not fail to plant a tree in our garden before midnight
+    You mustn't read this sentence right now
+    `},
 
-    "Modal Operator of Possibility":
+    "Modal Operator of Possibility": {
+        examples:
         `
-    I can't tell the truth
-    I can't go there now 
-    I can't relax
-    I can't ring that customer 
-    I'll never be to able to learn this
-    I won't be able to complete that on time
-    I can't sleep
-    I can't apply for that job 
-    I couldn't possibly tell you
-    I might not finish that report on time 
-    I couldn't ask for a pay rise
-    I can't imagine that 
-    I can't concentrate on work at the moment
-    I might just tell him that 
-    I couldn't fire her
-    I could do it if I tried 
-    I might do what he says
-    `
+    I can't tell you the truth about what my given name is
+    I can't go to your place now 
+    I can't relax my right leg
+    I can't call Eric now 
+    I'll never be to able to learn how to tie my shoes
+    I won't be able to complete project X before the deadline tomorrow
+    I can't sleep now
+    I can't apply for job X
+    I couldn't possibly tell you what my real name is now
+    I might not finish report X before 15:00 today 
+    Today, I couldn't ask Jennie to raise my pay 5%
+    I can't imagine that you showered with cold water today
+    I can't concentrate on working on my job at the moment
+    Tomorrow, I might just tell him that I stole his Apple watch
+    I couldn't fire her from her current position
+    I could eat an apple if I tried 
+    I might do what he says I should do at 19:00
+    `}
 }
 
 // Turn sentence strings into arrays
 var sentencesLength = 0;
-for (var [key, value] of Object.entries(sentences)) {
-    sentences[key] = value.split("\n").slice(1, -1);
+for (var [key, value] of Object.entries(metaModelSentences)) {
+    metaModelSentences[key].examples = value.examples.split("\n").slice(1, -1);
     // Trim spaces around sentences
-    for (let i = 0; i < sentences[key].length; i++) {
-        sentences[key][i] = sentences[key][i].trim();
+    for (let i = 0; i < metaModelSentences[key].examples.length; i++) {
+        metaModelSentences[key].examples[i] = metaModelSentences[key].examples[i].trim();
     }
-    sentencesLength += sentences[key].length;
+    sentencesLength += metaModelSentences[key].examples.length;
 }
-// sentences["size"] = sentencesLength;
-console.log(sentences["Modal Operator of Possibility"]);
-console.log(sentences.size);
-
+metaModelSentences["size"] = sentencesLength;
