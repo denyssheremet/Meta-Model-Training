@@ -11,7 +11,7 @@ var currentMod = "";
 var trainingDropdownOpen = false;
 var dropdownShowing = false;
 var activeMappings = [...mappings];
-
+var dropdownOptionSelected = "all";
 
 function showDropdown() {
     if (dropdownShowing) {
@@ -36,20 +36,58 @@ function chooseSentence() {
     document.getElementById("sentence").innerHTML = currentSentence;
 };
 
-function selectMappings(selectedMapping) {
-    let index = activeMappings.indexOf(selectedMapping);
+function selectMappings(choice) {
+    dropdownOptionSelected = choice;
 
-    if (index != -1) {
-        document.getElementById("dropdown:" + selectedMapping).style.color = "#1a1a1a";
-        document.getElementById("dropdown:" + selectedMapping).style.fontWeight = "normal";
-        document.getElementById("answer:" + selectedMapping).style.display = "none";
-        activeMappings.splice(index, 1);
-    } else {
-        document.getElementById("dropdown:" + selectedMapping).style.color = "lightgoldenrodyellow";
-        document.getElementById("dropdown:" + selectedMapping).style.fontWeight = "bold";
-        document.getElementById("answer:" + selectedMapping).style.display = "block";
-        activeMappings.push(selectedMapping);
-    };
+    switch (dropdownOptionSelected) {
+        case "deletion":
+            activeMappings = [...deletions];
+            break;
+        case "distortion":
+            activeMappings = [...distortions];
+            break;
+        case "generalization":
+            activeMappings = [...generalizations];
+            break;
+        case "all":
+            activeMappings = deletions.concat(distortions, generalizations);
+            break;
+    }
+
+    // make buttons selected or unselected
+    let allDropdownButtons = document.getElementsByClassName("dropdownButton");
+    let selectedDropdownButtons = document.getElementsByClassName("dropdown:" + dropdownOptionSelected);
+    let allAnswerButtons = document.getElementsByClassName("answerButton");
+    let selectedAnswerButtons = document.getElementsByClassName("answer:" + dropdownOptionSelected);
+
+    console.log(selectedDropdownButtons);
+
+    //make all answer- and dropdown buttons invisible
+    for (let i = 0; i < allAnswerButtons.length; i++) {
+        allAnswerButtons[i].style.display = "none";
+        if (i < allDropdownButtons.length) {
+            allDropdownButtons[i].style.color = "#1a1a1a";
+            allDropdownButtons[i].style.fontWeight = "normal";
+        }
+    }
+    //make the selected answer- and dropdown buttons visible again
+    for (let i = 0; i < selectedAnswerButtons.length; i++) {
+        selectedAnswerButtons[i].style.display = "block";
+        if (i < selectedDropdownButtons.length) {
+            selectedDropdownButtons[i].style.color = "lightgoldenrodyellow";
+            selectedDropdownButtons[i].style.fontWeight = "bold";
+        }
+    }
+
+    // if "all" selected, show all answerButtons.
+    if (dropdownOptionSelected === "all") {
+        //make all answer- and dropdown buttons visible
+        for (let i = 0; i < allAnswerButtons.length; i++) {
+            allAnswerButtons[i].style.display = "block";
+        }
+        document.getElementById("dropdown:all").style.color = "lightgoldenrodyellow";
+        document.getElementById("dropdown:all").style.fontWeight = "bold";
+    }
 }
 
 function makeDiv(divName, appendTo) {
@@ -72,22 +110,22 @@ function makeH3(innerHTML, appendTo, id = "") {
     document.getElementById(appendTo).appendChild(h3);
 }
 
-function makeAnswerButton(name, appendTo, func) {
+function makeAnswerButton(name, className, appendTo, func) {
     let btn = document.createElement("button");
     btn.id = "answer:" + name;
     btn.innerHTML = name;
-    btn.className = "answerButton";
+    btn.className = "answerButton answer:" + className;
     btn.onclick = func;
     document.getElementById(appendTo).appendChild(btn);
 }
 
-function makeDropdownButton(name, appendTo) {
+function makeDropdownButton(name, func) {
     let btn = document.createElement("button");
-    btn.id = "dropdown:" + name;
-    btn.className = "dropdownBtn";
+    btn.id = "dropdown:" + name.toLowerCase();
+    btn.className = "dropdownButton dropdown:" + name.toLowerCase();
     btn.innerHTML = name;
-    btn.onclick = function () { selectMappings(name); };
-    document.getElementById(appendTo).appendChild(btn);
+    btn.onclick = func;
+    document.getElementById("selectionDropdown").appendChild(btn);
 }
 
 function makeTextArea(id, appendTo) {
@@ -154,7 +192,15 @@ function chooseRandEnrichedSentence() {
 function startMetaModelTrainer1() {
     clearIndex();
     document.getElementById("title").innerHTML = "Meta Model Trainer 1 (Beginner)";
+    document.getElementById("selectionDropdown").innerHTML = "";
+    document.getElementById("dropdown").style.display = "block";
     makeH2("", "topDiv", "sentence");
+
+    makeDropdownButton("Deletion", function () { selectMappings("deletion"); });
+    makeDropdownButton("Distortion", function () { selectMappings("distortion"); });
+    makeDropdownButton("Generalization", function () { selectMappings("generalization"); });
+    makeDropdownButton("All", function () { selectMappings("all"); });
+
 
 
     // generate Buttons for different answers
@@ -162,22 +208,22 @@ function startMetaModelTrainer1() {
     makeH2("Deletions", "deletionButtons");
     makeDiv("deletionDropdown", "selectionDropdown", "");
     for (let i = 0; i < deletions.length; i++) {
-        makeAnswerButton(deletions[i], "deletionButtons", function () { answerChosen(deletions[i]); chooseSentence();});
-        makeDropdownButton(deletions[i], "deletionDropdown");
+        makeAnswerButton(deletions[i], "deletion", "deletionButtons", function () { answerChosen(deletions[i]); chooseSentence(); });
+        // makeDropdownButton(deletions[i], "deletionDropdown");
     }
     makeDiv("distortionButtons", "bottomDiv", "Distortion");
     makeH2("Distortions", "distortionButtons");
     makeDiv("distortionDropdown", "selectionDropdown", "");
     for (let i = 0; i < distortions.length; i++) {
-        makeAnswerButton(distortions[i], "distortionButtons", function () { answerChosen(distortions[i]); chooseSentence();});
-        makeDropdownButton(distortions[i], "distortionDropdown");
+        makeAnswerButton(distortions[i], "distortion", "distortionButtons", function () { answerChosen(distortions[i]); chooseSentence(); });
+        // makeDropdownButton(distortions[i], "distortionDropdown");
     }
     makeDiv("generalizationButtons", "bottomDiv", "Generalization");
     makeH2("Generalizations", "generalizationButtons");
     makeDiv("generalizationDropdown", "selectionDropdown", "");
     for (let i = 0; i < generalizations.length; i++) {
-        makeAnswerButton(generalizations[i], "generalizationButtons", function () { answerChosen(generalizations[i]); chooseSentence();});
-        makeDropdownButton(generalizations[i], "generalizationDropdown");
+        makeAnswerButton(generalizations[i], "generalization", "generalizationButtons", function () { answerChosen(generalizations[i]); chooseSentence(); });
+        // makeDropdownButton(generalizations[i], "generalizationDropdown");
     }
     chooseSentence();
 };
@@ -189,9 +235,9 @@ function startEnrichedLanguageTrainer1() {
     makeH2("", "topDiv", "sentence");
     chooseRandEnrichedSentence();
 
-    makeAnswerButton("Visual", "bottomDiv", function () { answerChosen("visual"); chooseRandEnrichedSentence();})
-    makeAnswerButton("Audio", "bottomDiv", function () { answerChosen("audio"); chooseRandEnrichedSentence();})
-    makeAnswerButton("Kinesthetic", "bottomDiv", function () { answerChosen("kinesthetic"); chooseRandEnrichedSentence();})
+    makeAnswerButton("Visual", "bottomDiv", function () { answerChosen("visual"); chooseRandEnrichedSentence(); })
+    makeAnswerButton("Audio", "bottomDiv", function () { answerChosen("audio"); chooseRandEnrichedSentence(); })
+    makeAnswerButton("Kinesthetic", "bottomDiv", function () { answerChosen("kinesthetic"); chooseRandEnrichedSentence(); })
 
 }
 
@@ -221,6 +267,8 @@ function clearIndex() {
     document.getElementById("topDiv").innerHTML = "";
     document.getElementById("bottomDiv").innerHTML = "";
     document.getElementById("title").innerHTML = "";
+    document.getElementById("dropdown").style.display = "none";
+    dropdownOptionSelected = "all";
 };
 
 function showTrainings() {
@@ -246,7 +294,8 @@ function selectTraining(trainingCode) {
 }
 
 window.addEventListener("load", function () {
-    startEnrichedLanguageTrainer1();
-    // startMetaModelTrainer1();
+    clearIndex();
+    // startEnrichedLanguageTrainer1();
+    startMetaModelTrainer1();
 });
 

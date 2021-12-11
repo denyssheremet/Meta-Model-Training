@@ -151,7 +151,7 @@ var metaModelSentences = {
         examples:
         `
     it's disaster to be made redundant
-    People make mistake 
+    People make mistakes
     Managers are overpaid
     You can't trust salespeople
     Marketing is an easy job
