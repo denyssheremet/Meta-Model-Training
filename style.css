@@ -1,12 +1,20 @@
 * {
     background-color: black;
     color: white;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 textarea {
     width: -webkit-fill-available;
     margin: 20px;
-    margin-top: 50px;
+}
+
+#sentence {
+    margin: 50px;
+}
+
+#submods {
+    margin-left: 70px;
 }
 
 #generalizationButtons, #distortionButtons, #deletionButtons {

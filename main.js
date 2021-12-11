@@ -57,11 +57,18 @@ function makeDiv(divName, appendTo) {
     document.getElementById(appendTo).appendChild(div);
 }
 
-function makeH2(innerHTML, appendTo, id="") {
+function makeH2(innerHTML, appendTo, id = "") {
     let h2 = document.createElement("h2");
     h2.innerHTML = innerHTML;
     h2.id = id;
     document.getElementById(appendTo).appendChild(h2);
+}
+
+function makeH3(innerHTML, appendTo, id = "") {
+    let h3 = document.createElement("h3");
+    h3.innerHTML = innerHTML;
+    h3.id = id;
+    document.getElementById(appendTo).appendChild(h3);
 }
 
 function makeAnswerButton(name, appendTo) {
@@ -87,6 +94,51 @@ function makeTextArea(id, appendTo) {
     ta.id = id;
     document.getElementById(appendTo).appendChild(ta);
 };
+
+function shuffle(array) {
+    let currentIndex = array.length, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+}
+
+function randFromList(listFrom, amount) {
+    const shuffled = shuffle(listFrom);
+
+    while (shuffled.length < amount) {
+        shuffled.push("");
+    }
+
+    return shuffled.slice(0, amount);
+};
+
+function getRandSubmodalities(amount) {
+    let randMod = randFromList(Object.keys(modalities1), 1)[0];
+    let randSubmod = randFromList(modalities1[randMod], amount);
+
+    document.getElementById("submods").innerHTML = randMod + ":";
+
+    for (let i = 0; i < randSubmod.length; i++) {
+        let p = document.createElement("p");
+        p.innerHTML = randSubmod[i];
+        document.getElementById("submods").appendChild(p);
+    }
+};
+
+function getRandSentence(listFrom) {
+    document.getElementById("sentence").innerHTML = listFrom[Math.floor(Math.random() * activeMappings.length)];
+}
 
 // starts Meta Model Trainer 1
 function startMetaModelTrainer1() {
@@ -122,8 +174,23 @@ function startMetaModelTrainer1() {
 
 function startEnrichedLanguageTrainer1() {
     document.getElementById("title").innerHTML = "Enriched Language Trainer 1 (Beginner)";
-    makeH2("Example Submodality", "topDiv", "sentence");
+    makeH2("Here is a sentence", "topDiv", "sentence");
+    makeH3("", "topDiv", "submods");
     makeTextArea("textarea", "bottomDiv");
+
+    getRandSubmodalities(3);
+    getRandSentence(modalityNeutralSentences);
+
+    let textarea = document.getElementById("textarea");
+
+    textarea.onkeydown = function () {
+        var key = event.keyCode || event.charCode;
+        if (key == 13) {
+            document.getElementById("textarea").value = "";
+            getRandSubmodalities(3);
+            getRandSentence(modalityNeutralSentences);
+        }
+    };
 };
 
 // Clears index.html so another Trainer can be started.
@@ -147,9 +214,9 @@ function selectTraining(trainingCode) {
     clearIndex();
     switch (trainingCode) {
         case "MMT1": startMetaModelTrainer1();
-        break;
+            break;
         case "ELT1": startEnrichedLanguageTrainer1();
-        break;
+            break;
     }
 }
 
