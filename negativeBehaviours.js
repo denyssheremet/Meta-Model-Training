@@ -72,7 +72,7 @@ Rambling
 Checking Your Hair / Eyebrows / Makeup / Nails
 Watching T.V Right After Work
 Repeating Yourself
-Forgetting What You’ve Told Someone
+Forgetting What You've Told Someone
 Forgetting Names Of People You Meet
 Giving Away “Tells” In Poker
 Falling Asleep In Class
@@ -121,7 +121,7 @@ Biting Your Lips
 Scratching An Itch
 Being An Attention Hog 
 Opening Countless Tabs
-Buzz-friggin’-feed
+Buzz-friggin'-feed
 Trolling Comments
 Watching Seinfeld Reruns
 Binge Watching Netflix
@@ -132,7 +132,7 @@ Fiddling With Keys
 Cheek Biting
 Chewing On Your Hair
 Shoplifting
-m&m’s
+m&m's
 Hair Pulling
 Scratching / Itching
 Biting Your Disgusting Toe Nails
@@ -169,7 +169,7 @@ Loitering
 Bullying People
 Copying
 Gossiping
-Finishing People’s Sentences
+Finishing People's Sentences
 Leaving The Toilet Seat Up
 Licking Your Fingers
 `
