@@ -1,7 +1,7 @@
 
 var metaModelSentences = {
 
-    "Lack of Referential Index": {
+    "Unspecified Noun": {
         examples:
         `
     I want a change

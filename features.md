@@ -31,6 +31,15 @@ The user sees a statement and a Milton Pattern, and needs to apply the pattern t
 Milton Model Training 3 (Advanced):
 The user sees a statement, and multiple Milton patterns. He needs to apply all patterns to the statement.
 
+Intention Reframe Training: 
+User sees a bad behaviour, needs to find the positive intent and basic human need behind it, and do an intent reframe based on it. 
+
+Negotiation Model Training:
+Behaviour -> Chunk up to Positive Intention -> Chunk down to better Positive Intention.
+
+Alphabet Game Generator: 
+An alphabet game chart gets automatically generated. 
+
 Assumption Mastery Training:
 The user sees a statement, and needs to reformulate it as an assumption.
 

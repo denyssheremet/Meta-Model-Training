@@ -7,6 +7,7 @@
 textarea {
     width: -webkit-fill-available;
     margin: 20px;
+    min-height: 80px;
 }
 
 #sentence {

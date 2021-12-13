@@ -49,7 +49,7 @@ var enrichedLanguageSentences = {
     • When he tried to recall his own face, he saw only a blur
     • The rain on the window blended the lights of the city together into a neon milkshake
     • He couldn't make out his grandmother's face until she stepped onto the platform, out of the fog
-    • The alcohol made his brain fuzzy
+    • The alcohol made his sight fuzzy
     • The cocaine cleared her mind
     • On the floor lay a piece of paper
     • A train came in from the left

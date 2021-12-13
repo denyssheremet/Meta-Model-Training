@@ -1,4 +1,4 @@
-const deletions = ["Simple Deletion", "Comparative Deletion", "Lack of Referential Index", "Unspecified Verb"];
+const deletions = ["Simple Deletion", "Comparative Deletion", "Unspecified Noun", "Unspecified Verb"];
 const distortions = ["Nominalization", "Cause and Effect", "Complex Equivalence", "Mind Reading", "Lost Comparative"];
 const generalizations = ["Universal Quantifiers", "Modal Operator of Necessity", "Modal Operator of Possibility", "Presupposition"];
 const mappings = deletions.concat(distortions, generalizations);
@@ -175,7 +175,7 @@ function getRandSubmodalities(amount) {
 };
 
 function getRandSentence(listFrom) {
-    document.getElementById("sentence").innerHTML = listFrom[Math.floor(Math.random() * activeMappings.length)];
+    document.getElementById("sentence").innerHTML = listFrom[Math.floor(Math.random() * listFrom.length)];
 }
 
 // chooses a random enriched sentence, and appends it to document.getElementById("sentence")
@@ -234,9 +234,9 @@ function startEnrichedLanguageTrainer1() {
     makeH2("", "topDiv", "sentence");
     chooseRandEnrichedSentence();
 
-    makeAnswerButton("Visual", "bottomDiv", function () { answerChosen("visual"); chooseRandEnrichedSentence(); })
-    makeAnswerButton("Audio", "bottomDiv", function () { answerChosen("audio"); chooseRandEnrichedSentence(); })
-    makeAnswerButton("Kinesthetic", "bottomDiv", function () { answerChosen("kinesthetic"); chooseRandEnrichedSentence(); })
+    makeAnswerButton("Visual", "answerButton answer:visual", "bottomDiv", function () { answerChosen("visual"); chooseRandEnrichedSentence(); })
+    makeAnswerButton("Audio", "answerButton answer:audio", "bottomDiv", function () { answerChosen("audio"); chooseRandEnrichedSentence(); })
+    makeAnswerButton("Kinesthetic", "answerButton answer:kinesthetic", "bottomDiv", function () { answerChosen("kinesthetic"); chooseRandEnrichedSentence(); })
 
 }
 
@@ -259,6 +259,27 @@ function startEnrichedLanguageTrainer2() {
             getRandSentence(modalityNeutralSentences);
         }
     };
+};
+
+function startIntentionReframeTrainer1() {
+    document.getElementById("title").innerHTML = "Intention Reframe Trainer 1";
+
+    makeH2("a", "topDiv", "sentence");
+    getRandSentence(negativeBehaviours);
+    makeTextArea("textarea", "bottomDiv");
+
+    for (let i = 0; i < basicNeeds.length; i++) {
+        makeH3(basicNeeds[i], "bottomDiv");
+    }
+
+    document.getElementById("textarea").onkeydown = function () {
+        var key = event.keyCode || event.charCode;
+        if (key == 13) {
+            document.getElementById("textarea").value = "";
+            getRandSentence(negativeBehaviours);
+        }
+    };
+
 };
 
 // Clears index.html so another Trainer can be started.
@@ -289,12 +310,15 @@ function selectTraining(trainingCode) {
             break;
         case "ELT2": startEnrichedLanguageTrainer2();
             break;
+        case "IRT1": startIntentionReframeTrainer1();
+            break;
     }
 }
 
 window.addEventListener("load", function () {
     clearIndex();
-    // startEnrichedLanguageTrainer1();
-    startMetaModelTrainer1();
+    // startEnrichedLanguageTrainer2();
+    // startMetaModelTrainer1();
+    startIntentionReframeTrainer1();
 });
 
