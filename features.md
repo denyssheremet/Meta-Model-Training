@@ -37,6 +37,9 @@ User sees a bad behaviour, needs to find the positive intent and basic human nee
 Negotiation Model Training:
 Behaviour -> Chunk up to Positive Intention -> Chunk down to better Positive Intention.
 
+Induction Trainer: 
+User sees a topic and an induction type (e.g. stacking realities) and needs to write an induction about that topic.
+
 Alphabet Game Generator: 
 An alphabet game chart gets automatically generated. 
 

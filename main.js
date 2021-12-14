@@ -127,10 +127,16 @@ function makeDropdownButton(name, func) {
     document.getElementById("selectionDropdown").appendChild(btn);
 }
 
-function makeTextArea(id, appendTo) {
+function makeTextArea(id, appendTo, placeholder = "", small = false) {
     let ta = document.createElement("textarea");
     ta.id = id;
+    ta.placeholder = placeholder;
+    if (small) {
+        ta.style.minHeight = "0px";
+        ta.style.margin="10px";
+    }
     document.getElementById(appendTo).appendChild(ta);
+
 };
 
 function shuffle(array) {
@@ -282,6 +288,28 @@ function startIntentionReframeTrainer1() {
 
 };
 
+function startLogicalLevelsTrainer1() {
+    document.getElementById("title").innerHTML = "Logical Levels Trainer 1";
+
+    makeH2("a", "topDiv", "sentence");
+    getRandSentence(negativeBehaviours);
+
+    for (let i = 0; i < logicalLevels.length; i++) {
+        makeTextArea("textarea" + (i+1), "bottomDiv", placeholder=logicalLevels[i], small = true);
+    }
+
+    document.getElementById("textarea6").onkeydown = function () {
+        var key = event.keyCode || event.charCode;
+        console.log("yes")
+        if (key == 13) {
+            for (let i = 0; i < logicalLevels.length; i++) {
+                document.getElementById("textarea" + (i + 1)).value = "";
+            }
+            getRandSentence(negativeBehaviours);
+        }
+    };
+}
+
 // Clears index.html so another Trainer can be started.
 function clearIndex() {
     document.getElementById("topDiv").innerHTML = "";
@@ -312,6 +340,8 @@ function selectTraining(trainingCode) {
             break;
         case "IRT1": startIntentionReframeTrainer1();
             break;
+        case "LLT1": startLogicalLevelsTrainer1();
+            break;
     }
 }
 
@@ -319,6 +349,7 @@ window.addEventListener("load", function () {
     clearIndex();
     // startEnrichedLanguageTrainer2();
     // startMetaModelTrainer1();
-    startIntentionReframeTrainer1();
+    // startIntentionReframeTrainer1();
+    startLogicalLevelsTrainer1();
 });
 

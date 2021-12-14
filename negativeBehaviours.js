@@ -176,6 +176,7 @@ Licking Your Fingers
 
 var basicNeeds = ["Certainty", "Uncertainty/Variation", "Significance", "Love/Connection", "Growth", "Contribution"];
 
+var logicalLevels = ["Environment", "Behaviour", "Skills", "Beliefs / Conviction", "Identity / Role", "Mission"]
 
 // turn string of negative behaviours into an array
 negativeBehaviours = negativeBehaviours.split("\n").slice(1, -1);
