@@ -133,7 +133,7 @@ function makeTextArea(id, appendTo, placeholder = "", small = false) {
     ta.placeholder = placeholder;
     if (small) {
         ta.style.minHeight = "0px";
-        ta.style.margin="10px";
+        ta.style.margin = "10px";
     }
     document.getElementById(appendTo).appendChild(ta);
 
@@ -184,6 +184,10 @@ function getRandSentence(listFrom) {
     document.getElementById("sentence").innerHTML = listFrom[Math.floor(Math.random() * listFrom.length)];
 }
 
+function getRandFromList(listFrom) {
+    return listFrom[Math.floor(Math.random() * listFrom.length)];
+}
+
 // chooses a random enriched sentence, and appends it to document.getElementById("sentence")
 function chooseRandEnrichedSentence() {
     let randMod = randFromList(Object.keys(enrichedLanguageSentences), 1)[0];
@@ -192,6 +196,27 @@ function chooseRandEnrichedSentence() {
 
     document.getElementById("sentence").innerHTML = randES;
 };
+
+
+function chooseNextMetaPrograms() {
+    document.getElementById("topDiv").innerHTML = "";
+    var dv = document.createElement("div");
+    dv.id = "metaProgramsDiv";
+    document.getElementById("topDiv").appendChild(dv);
+
+    let chosenMetaPrograms = [];
+    for (let i = 0; i < 3; i++) {
+        let chosenType = getRandFromList(Object.keys(metaPrograms));
+        let chosenProgram;
+        do {
+            chosenProgram = getRandFromList(Object.keys(metaPrograms[chosenType]));
+        } while (chosenMetaPrograms.includes(chosenProgram));
+
+        chosenMetaPrograms.push(chosenProgram);
+        let chosenText = chosenProgram + ": " + getRandFromList(metaPrograms[chosenType][chosenProgram]);
+        makeH3(chosenText, "metaProgramsDiv", id = "textarea" + (i + 1))
+    }
+}
 
 // starts Meta Model Trainer 1
 function startMetaModelTrainer1() {
@@ -295,17 +320,40 @@ function startLogicalLevelsTrainer1() {
     getRandSentence(negativeBehaviours);
 
     for (let i = 0; i < logicalLevels.length; i++) {
-        makeTextArea("textarea" + (i+1), "bottomDiv", placeholder=logicalLevels[i], small = true);
+        makeTextArea("textarea" + (i + 1), "bottomDiv", placeholder = logicalLevels[i], small = true);
     }
 
     document.getElementById("textarea6").onkeydown = function () {
         var key = event.keyCode || event.charCode;
-        console.log("yes")
         if (key == 13) {
             for (let i = 0; i < logicalLevels.length; i++) {
                 document.getElementById("textarea" + (i + 1)).value = "";
             }
             getRandSentence(negativeBehaviours);
+        }
+    };
+}
+
+function startMetaProgramTrainer1() {
+    document.getElementById("title").innerHTML = "Meta Program Trainer 1";
+
+    chooseNextMetaPrograms();
+
+    for (let i = 0; i < contexts.length; i++) {
+        makeTextArea("textarea" + (i + 1), "bottomDiv", placeholder = contexts[i], small = true);
+    }
+
+    document.getElementById("textarea4").onkeydown = function () {
+        var key = event.keyCode || event.charCode;
+        if (key == 13) {
+            
+            for (let i = 0; i < contexts.length; i++) {
+                console.log(document.getElementById("textarea" + (i + 1)).value);
+                document.getElementById("textarea" + (i + 1)).value = "";
+                console.log("textarea" + (i + 1));
+                console.log(document.getElementById("textarea" + (i + 1)).value);
+            }
+            chooseNextMetaPrograms();
         }
     };
 }
@@ -342,6 +390,8 @@ function selectTraining(trainingCode) {
             break;
         case "LLT1": startLogicalLevelsTrainer1();
             break;
+        case "MPT1": startMetaProgramTrainer1();
+            break;
     }
 }
 
@@ -350,6 +400,7 @@ window.addEventListener("load", function () {
     // startEnrichedLanguageTrainer2();
     // startMetaModelTrainer1();
     // startIntentionReframeTrainer1();
-    startLogicalLevelsTrainer1();
+    // startLogicalLevelsTrainer1();
+    startMetaProgramTrainer1();
 });
 
