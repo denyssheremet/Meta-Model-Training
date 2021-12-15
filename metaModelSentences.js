@@ -29,7 +29,7 @@ var metaModelSentences = {
     Those products are expensive 
     One knows what's best
     This happens everyday 
-    If you learn NLP you will become very rich
+    If you learn this you will become very rich
     We shouldn't do that 
     It's either them or us
     You must turn your mobile off in the office 
@@ -113,7 +113,7 @@ var metaModelSentences = {
     Our new product is more effective
     It's for the greater good 
     He's more sensitive
-    NLP is better 
+    Soccer is better 
     She goes further
     This is far more efficient 
     You look happier
@@ -160,7 +160,7 @@ var metaModelSentences = {
     They're always doing that 
     People learn from people who are different
     This report needs finishing 
-    Learning NLP will make you more successful
+    Learning algebra will make you more successful
     A meeting was held 
     This needs fixing
     Mistakes have been made 
@@ -188,7 +188,7 @@ var metaModelSentences = {
     He'll hate you if you do that 
     When I present, everyone is judging me
     The boss is in a foul mood today 
-    You can see how effective NLP is
+    You can see how effective MS Paint is
     You know this isn't working 
     I know you're enjoying this
     `},
@@ -254,7 +254,7 @@ var metaModelSentences = {
     They always have an excuse
     Everybody works too hard
     Sales people can never be trusted
-    NLP practitioners are always healthy
+    Doctors are always healthy
     `},
 
     "Modal Operator of Necessity": {

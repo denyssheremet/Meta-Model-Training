@@ -37,6 +37,9 @@ User sees a bad behaviour, needs to find the positive intent and basic human nee
 Negotiation Model Training:
 Behaviour -> Chunk up to Positive Intention -> Chunk down to better Positive Intention.
 
+Pacing & Leading Trainer: 
+The user sees a form of pacing and leading, a topic, and a connecting word, and needs to write a pace.
+
 Induction Trainer: 
 User sees a topic and an induction type (e.g. stacking realities) and needs to write an induction about that topic.
 

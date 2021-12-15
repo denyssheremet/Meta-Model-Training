@@ -1,6 +1,9 @@
 const deletions = ["Simple Deletion", "Comparative Deletion", "Unspecified Noun", "Unspecified Verb"];
 const distortions = ["Nominalization", "Cause and Effect", "Complex Equivalence", "Mind Reading", "Lost Comparative"];
 const generalizations = ["Universal Quantifiers", "Modal Operator of Necessity", "Modal Operator of Possibility", "Presupposition"];
+// const deletions = ["Comparative Deletion"];
+// const distortions = [];
+// const generalizations = ["Universal Quantifiers"];
 const mappings = deletions.concat(distortions, generalizations);
 
 var currentSentence = "";
@@ -221,7 +224,9 @@ function chooseNextMetaPrograms() {
 // starts Meta Model Trainer 1
 function startMetaModelTrainer1() {
     clearIndex();
-    document.getElementById("title").innerHTML = "Meta Model Trainer 1 (Beginner)";
+    // document.getElementById("title").innerHTML = "Meta Model Trainer 1 (Beginner)";
+    document.getElementById("title").innerHTML = "Asking Specific Questions";
+    
     document.getElementById("selectionDropdown").innerHTML = "";
     document.getElementById("dropdown").style.display = "block";
     makeH2("", "topDiv", "sentence");
@@ -297,20 +302,20 @@ function startIntentionReframeTrainer1() {
 
     makeH2("a", "topDiv", "sentence");
     getRandSentence(negativeBehaviours);
-    makeTextArea("textarea", "bottomDiv");
 
     for (let i = 0; i < basicNeeds.length; i++) {
-        makeH3(basicNeeds[i], "bottomDiv");
+        makeTextArea("textarea" + (i + 1), "bottomDiv", placeholder = basicNeeds[i], small = true);
     }
 
-    document.getElementById("textarea").onkeydown = function () {
+    document.getElementById("textarea6").onkeydown = function () {
         var key = event.keyCode || event.charCode;
         if (key == 13) {
-            document.getElementById("textarea").value = "";
+            for (let i = 0; i < basicNeeds.length; i++) {
+                document.getElementById("textarea" + (i + 1)).value = "";
+            }
             getRandSentence(negativeBehaviours);
         }
     };
-
 };
 
 function startLogicalLevelsTrainer1() {
@@ -399,8 +404,8 @@ window.addEventListener("load", function () {
     clearIndex();
     // startEnrichedLanguageTrainer2();
     // startMetaModelTrainer1();
-    // startIntentionReframeTrainer1();
+    startIntentionReframeTrainer1();
     // startLogicalLevelsTrainer1();
-    startMetaProgramTrainer1();
+    // startMetaProgramTrainer1();
 });
 
