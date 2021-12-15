@@ -226,7 +226,7 @@ function startMetaModelTrainer1() {
     clearIndex();
     // document.getElementById("title").innerHTML = "Meta Model Trainer 1 (Beginner)";
     document.getElementById("title").innerHTML = "Asking Specific Questions";
-    
+
     document.getElementById("selectionDropdown").innerHTML = "";
     document.getElementById("dropdown").style.display = "block";
     makeH2("", "topDiv", "sentence");
@@ -339,6 +339,31 @@ function startLogicalLevelsTrainer1() {
     };
 }
 
+function startReframingTrainer1() {
+    document.getElementById("title").innerHTML = "Reframing Trainer 1";
+
+    makeH2("a", "topDiv", "sentence");
+    getRandSentence(negativeBehaviours);
+
+    let chosenFrames = randFromList(frames, 3);
+    for (let i = 0; i < chosenFrames.length; i++) {
+        makeTextArea("textarea" + (i + 1), "bottomDiv", placeholder = chosenFrames[i], small = true);
+    }
+
+    document.getElementById("textarea3").onkeydown = function () {
+        var key = event.keyCode || event.charCode;
+        if (key == 13) {
+            chosenFrames = randFromList(frames, 3);
+            for (let i = 0; i < chosenFrames.length; i++) {
+                document.getElementById("textarea" + (i + 1)).value = "";
+                document.getElementById("textarea" + (i + 1)).placeholder = chosenFrames[i];
+            }
+            console.log("yes)")
+            getRandSentence(negativeBehaviours);
+        }
+    };
+}
+
 function startMetaProgramTrainer1() {
     document.getElementById("title").innerHTML = "Meta Program Trainer 1";
 
@@ -351,7 +376,7 @@ function startMetaProgramTrainer1() {
     document.getElementById("textarea4").onkeydown = function () {
         var key = event.keyCode || event.charCode;
         if (key == 13) {
-            
+
             for (let i = 0; i < contexts.length; i++) {
                 console.log(document.getElementById("textarea" + (i + 1)).value);
                 document.getElementById("textarea" + (i + 1)).value = "";
@@ -397,6 +422,8 @@ function selectTraining(trainingCode) {
             break;
         case "MPT1": startMetaProgramTrainer1();
             break;
+        case "MPT1": startReframingTrainer1();
+            break;
     }
 }
 
@@ -404,8 +431,9 @@ window.addEventListener("load", function () {
     clearIndex();
     // startEnrichedLanguageTrainer2();
     // startMetaModelTrainer1();
-    startIntentionReframeTrainer1();
+    // startIntentionReframeTrainer1();
     // startLogicalLevelsTrainer1();
     // startMetaProgramTrainer1();
+    startReframingTrainer1();
 });
 
