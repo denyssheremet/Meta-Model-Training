@@ -9,7 +9,7 @@ var question
 
 function answerChosen(answer) {
     if (!question.checkAnswer(answer)) {
-        alert("Correct answer: " + question.answer);
+        alert("Your answer: " + answer + "\nCorrect answer: " + question.answer);
     };
 };
 
@@ -326,7 +326,7 @@ class MultipleChoiceDict {
 
 
 // starts Meta Model Trainer 1
-function startMultipleChoiceTrainer(dict, title) {
+function startMultipleChoiceTrainer(dict, title, buttons = true) {
     clearIndex();
     document.getElementById("title").innerHTML = title;
     question = new Question();
@@ -334,58 +334,36 @@ function startMultipleChoiceTrainer(dict, title) {
 
 
     mcd = new MultipleChoiceDict(dict);
+    if (buttons) {
+        // make div for each category
+        for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
+            let category = mcd.getCategoryKeys()[i];
+            makeDiv(category + "Buttons", "bottomDiv", category);
+            makeH2(category, category + "Buttons");
 
-    // make div for each category
-    for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
-        let category = mcd.getCategoryKeys()[i];
-        makeDiv(category + "Buttons", "bottomDiv", category);
-        makeH2(category, category + "Buttons");
-
-        // generate answer buttons
-        for (let j = 0; j < mcd.getSubCategoryKeys(category).length; j++) {
-            let subCategory = mcd.getSubCategoryKeys(category)[j];
-            makeAnswerButton(subCategory, category, category + "Buttons", function () {
-                answerChosen(subCategory); chooseSentence();
-            });
+            // generate answer buttons
+            for (let j = 0; j < mcd.getSubCategoryKeys(category).length; j++) {
+                let subCategory = mcd.getSubCategoryKeys(category)[j];
+                makeAnswerButton(subCategory, category, category + "Buttons", function () {
+                    answerChosen(subCategory); chooseSentence();
+                });
+            }
         }
-    }
-    chooseSentence();
-
-    // make dropdown
-    dropdown.clearContent();
-    dropdown.toggleVisibility(true);
-
-    for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
-        let category = mcd.getCategoryKeys()[i];
-        makeDropdownButton(category, function () { selectMappings(category); });
-    }
-    makeDropdownButton("All", function () { selectMappings("all"); });
-};
-
-// starts Meta Program Trainer 1
-function startMetaProgramTrainer1() {
-    clearIndex();
-    document.getElementById("title").innerHTML = "Meta Program Trainer 1 (Beginner)";
-    question = new Question();
-    question.clear();
-
-
-    mcd = new MultipleChoiceDict(metaProgramsMC);
-
-    // make div for each category
-    for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
-        let category = mcd.getCategoryKeys()[i];
-        makeDiv(category + "Buttons", "bottomDiv", category);
-        makeH2(category, category + "Buttons");
-
-        // generate answer buttons
-        for (let j = 0; j < mcd.getSubCategoryKeys(category).length; j++) {
-            let subCategory = mcd.getSubCategoryKeys(category)[j];
-            makeAnswerButton(subCategory, category, category + "Buttons", function () {
-                answerChosen(subCategory); chooseSentence();
-            });
+    } else {
+        let subCats = [];
+        for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
+            let category = mcd.getCategoryKeys()[i];
+            for (let j = 0; j < mcd.getSubCategoryKeys(category).length; j++) {
+                let subCategory = mcd.getSubCategoryKeys(category)[j];
+                subCats.push(subCategory);
+            }
         }
+        makeTextArea("input", "bottomDiv");
+        autocomplete(document.getElementById("input"), subCats, "bottomDiv",
+            function (answer) { answerChosen(answer); chooseSentence(); });
+        console.log(subCats);
     }
+
     chooseSentence();
 
     // make dropdown
@@ -427,6 +405,7 @@ function startEnrichedLanguageTrainer2() {
     question = new Question()
     makeH3("", "topDiv", "submods");
     makeTextArea("textarea", "bottomDiv");
+    autocomplete(document.getElementById("textarea"), basicNeeds, "bottomDiv");
 
     getRandSubmodalities(3);
     getRandSentence(modalityNeutralSentences);
@@ -509,42 +488,7 @@ function startReframingTrainer1() {
     };
 }
 
-// // starts Meta Program Trainer 1
-// function startMetaProgramTrainer1() {
-//     clearIndex();
-//     document.getElementById("title").innerHTML = "Meta Program Trainer 1";
-//     question = new Question();
-//     question.clear();
 
-
-//     mcd = new MultipleChoiceDict(metaProgramsMC);
-
-//     // make div for each category
-//     for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
-//         let category = mcd.getCategoryKeys()[i];
-//         makeDiv(category + "Buttons", "bottomDiv", category);
-//         makeH2(category, category + "Buttons");
-
-//         // generate answer buttons
-//         for (let j = 0; j < mcd.getSubCategoryKeys(category).length; j++) {
-//             let subCategory = mcd.getSubCategoryKeys(category)[j];
-//             makeAnswerButton(subCategory, category, category + "Buttons", function () {
-//                 answerChosen(subCategory); chooseSentence();
-//             });
-//         }
-//     }
-//     chooseSentence();
-
-//     // make dropdown
-//     dropdown.clearContent();
-//     dropdown.toggleVisibility(true);
-
-//     for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
-//         let category = mcd.getCategoryKeys()[i];
-//         makeDropdownButton(category, function () { selectMappings(category); });
-//     }
-//     makeDropdownButton("All", function () { selectMappings("all"); });
-// };
 
 function startMetaProgramTrainer2() {
     document.getElementById("title").innerHTML = "Meta Program Trainer 2";
@@ -552,7 +496,7 @@ function startMetaProgramTrainer2() {
 
     dropdown.clearContent();
     dropdown.toggleVisibility(true);
-    question = new Question();    
+    question = new Question();
 
     makeDropdownButton("Motivation", function () { activeMetaPrograms = "motivation"; dropdown.toggleOpen(); });
     makeDropdownButton("Productivity", function () { activeMetaPrograms = "productivity"; dropdown.toggleOpen(); });
@@ -629,7 +573,9 @@ function selectTraining(trainingCode) {
             break;
         case "LLT1": startLogicalLevelsTrainer1();
             break;
-        case "MPT1": startMultipleChoiceTrainer(metaProgramsMC, "Meta Program Trainer 1");
+        case "MPT1": startMultipleChoiceTrainer(metaProgramsMC, "Meta Program Trainer 1", false);
+            break;
+        case "MPT2": startMetaProgramTrainer2();
             break;
         case "MPT1": startReframingTrainer1();
             break;
@@ -654,7 +600,8 @@ window.addEventListener("load", function () {
     // startLogicalLevelsTrainer1();
     // startMetaProgramTrainer2();
     // startReframingTrainer1();
-    selectTraining("MPT1");
 
+    selectTraining("MPT1");
+    showTrainings();
 });
 
