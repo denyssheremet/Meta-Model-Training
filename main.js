@@ -189,8 +189,8 @@ function chooseNextMetaPrograms(amountOfMetaPrograms) {
 }
 
 class Question {
-    constructor(id) {
-        this.id = id;
+    constructor() {
+        this.id = "sentence";
         makeH2("", "topDiv", this.id);
     }
 
@@ -306,7 +306,7 @@ function startMetaModelTrainer1() {
     clearIndex();
     // document.getElementById("title").innerHTML = "Meta Model Trainer 1 (Beginner)";
     document.getElementById("title").innerHTML = "Asking Specific Questions";
-    question = new Question("sentence");
+    question = new Question();
     question.clear();
     
 
@@ -343,7 +343,7 @@ function startEnrichedLanguageTrainer1() {
     document.getElementById("title").innerHTML = "Enriched Language Trainer 1 (Beginner)";
     document.getElementById("bottomDiv").style.display = "flex";
     document.getElementById("bottomDiv").style.margin = "100px";
-    question = new Question("sentence")
+    question = new Question()
     chooseRandEnrichedSentence();
 
     makeAnswerButton("Visual", "answerButton answer:visual", "bottomDiv", function () { answerChosen("visual"); chooseRandEnrichedSentence(); })
@@ -354,7 +354,7 @@ function startEnrichedLanguageTrainer1() {
 
 function startEnrichedLanguageTrainer2() {
     document.getElementById("title").innerHTML = "Enriched Language Trainer 2 (Advanced)";
-    question = new Question("sentence")
+    question = new Question()
     makeH3("", "topDiv", "submods");
     makeTextArea("textarea", "bottomDiv");
 
@@ -376,7 +376,7 @@ function startEnrichedLanguageTrainer2() {
 function startIntentionReframeTrainer1() {
     document.getElementById("title").innerHTML = "Intention Reframe Trainer 1";
 
-    question = new Question("sentence")
+    question = new Question()
     getRandSentence(negativeBehaviours);
 
     for (let i = 0; i < basicNeeds.length; i++) {
@@ -397,7 +397,7 @@ function startIntentionReframeTrainer1() {
 function startLogicalLevelsTrainer1() {
     document.getElementById("title").innerHTML = "Logical Levels Trainer 1";
 
-    question = new Question("sentence")
+    question = new Question()
     getRandSentence(negativeBehaviours);
 
     for (let i = 0; i < logicalLevels.length; i++) {
@@ -418,7 +418,7 @@ function startLogicalLevelsTrainer1() {
 function startReframingTrainer1() {
     document.getElementById("title").innerHTML = "Reframing Trainer 1";
 
-    question = new Question("sentence")
+    question = new Question()
     getRandSentence(negativeBehaviours);
 
     let chosenFrames = randFromList(frames, 3);
@@ -445,7 +445,7 @@ function startMetaProgramTrainer1() {
 
     dropdown.clearContent();
     dropdown.toggleVisibility(true);
-    question = new Question("sentence")
+    question = new Question()
 
     makeDropdownButton("Motivation", function () { activeMetaPrograms = "motivation"; dropdown.toggleOpen(); });
     makeDropdownButton("Productivity", function () { activeMetaPrograms = "productivity"; dropdown.toggleOpen(); });
@@ -530,7 +530,7 @@ function selectTraining(trainingCode) {
 window.addEventListener("load", function () {
     clearIndex();
     dropdown = new Dropdown("dropdown", "selectionDropdown");
-    question = new Question("sentence")
+    question = new Question()
 
     // startEnrichedLanguageTrainer2();
     startMetaModelTrainer1();
