@@ -16,13 +16,14 @@ var dropdownShowing = false;
 var activeMappings = [...mappings];
 var dropdownOptionSelected = "all";
 
+var activeMetaPrograms = "all";
+
+
 function showDropdown() {
     if (dropdownShowing) {
         document.getElementById("selectionDropdown").style.display = "none";
-        chooseSentence();
     } else {
         document.getElementById("selectionDropdown").style.display = "block";
-        document.getElementById("sentence").innerHTML = "";
     }
     dropdownShowing = !dropdownShowing;
 }
@@ -57,6 +58,11 @@ function selectMappings(choice) {
             break;
     }
     showDropdown();
+    if (dropdownShowing) {
+        chooseSentence();
+    } else {
+        document.getElementById("sentence").innerHTML = "";
+    }
 
     // make buttons selected or unselected
     let allDropdownButtons = document.getElementsByClassName("dropdownButton");
@@ -202,7 +208,13 @@ function chooseRandEnrichedSentence() {
 
 // this function chooses n random metaprograms, and puts them in the right h3
 function chooseNextMetaPrograms(amountOfMetaPrograms) {
-    let chosenKey = randFromList(Object.keys(metaPrograms), 1)[0];
+    let chosenKey;
+    if (activeMetaPrograms === "all") {
+        chosenKey = randFromList(Object.keys(metaPrograms), 1)[0];
+    }
+    else {
+        chosenKey = activeMetaPrograms;
+    }
     let chosenPrograms = randFromList(Object.keys(metaPrograms[chosenKey]), amountOfMetaPrograms);
 
     for (let i = 0; i < amountOfMetaPrograms; i++) {
@@ -234,21 +246,18 @@ function startMetaModelTrainer1() {
     makeDiv("deletionDropdown", "selectionDropdown", "");
     for (let i = 0; i < deletions.length; i++) {
         makeAnswerButton(deletions[i], "deletion", "deletionButtons", function () { answerChosen(deletions[i]); chooseSentence(); });
-        // makeDropdownButton(deletions[i], "deletionDropdown");
     }
     makeDiv("distortionButtons", "bottomDiv", "Distortion");
     makeH2("Distortions", "distortionButtons");
     makeDiv("distortionDropdown", "selectionDropdown", "");
     for (let i = 0; i < distortions.length; i++) {
         makeAnswerButton(distortions[i], "distortion", "distortionButtons", function () { answerChosen(distortions[i]); chooseSentence(); });
-        // makeDropdownButton(distortions[i], "distortionDropdown");
     }
     makeDiv("generalizationButtons", "bottomDiv", "Generalization");
     makeH2("Generalizations", "generalizationButtons");
     makeDiv("generalizationDropdown", "selectionDropdown", "");
     for (let i = 0; i < generalizations.length; i++) {
         makeAnswerButton(generalizations[i], "generalization", "generalizationButtons", function () { answerChosen(generalizations[i]); chooseSentence(); });
-        // makeDropdownButton(generalizations[i], "generalizationDropdown");
     }
     chooseSentence();
 };
@@ -356,8 +365,16 @@ function startReframingTrainer1() {
 
 function startMetaProgramTrainer1() {
     document.getElementById("title").innerHTML = "Meta Program Trainer 1";
+    let amountOfMetaPrograms = 5;
 
-    let amountOfMetaPrograms = 3;
+    document.getElementById("selectionDropdown").innerHTML = "";
+    document.getElementById("dropdown").style.display = "block";
+    makeH2("", "topDiv", "sentence");
+
+    makeDropdownButton("Motivation", function () { activeMetaPrograms = "motivation"; showDropdown(); });
+    makeDropdownButton("Productivity", function () { activeMetaPrograms = "productivity"; showDropdown(); });
+    makeDropdownButton("All", function () { activeMetaPrograms = "all"; showDropdown(); });
+
 
     // create div inside topDiv
     var dv = document.createElement("div");
@@ -386,7 +403,7 @@ function startMetaProgramTrainer1() {
             for (let i = 0; i < contexts.length; i++) {
                 document.getElementById("textarea" + (i + 1)).value = "";
             }
-        chooseNextMetaPrograms(amountOfMetaPrograms);
+            chooseNextMetaPrograms(amountOfMetaPrograms);
         }
     };
 }

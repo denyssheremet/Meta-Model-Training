@@ -7,7 +7,7 @@ var metaPrograms = {
         "Direction": ["Towards", "Away From"],
         "Source": ["Internal", "External"],
         "Reason": ["Options", "Procedures"],
-        "Decision Factors": ["Sameness", "Sameness with Exception", "Difference", "Difference with Exception"],
+        "Decision Factors": ["Sameness", "Sameness with Exception", "Difference", "Sameness with Exception and Difference"],
     },
     productivity: {
         "Scope": ["Specific", "General"],
