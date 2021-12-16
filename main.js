@@ -1,36 +1,22 @@
-const deletions = ["Simple Deletion", "Comparative Deletion", "Unspecified Noun", "Unspecified Verb"];
-const distortions = ["Nominalization", "Cause and Effect", "Complex Equivalence", "Mind Reading", "Lost Comparative"];
-const generalizations = ["Universal Quantifiers", "Modal Operator of Necessity", "Modal Operator of Possibility", "Presupposition"];
-// const deletions = ["Comparative Deletion"];
-// const distortions = [];
-// const generalizations = ["Universal Quantifiers"];
-const mappings = deletions.concat(distortions, generalizations);
-
-var currentSentence = "";
-var correctAnswer = "";
-
-var currentMod = "";
-
 var trainingDropdownOpen = false;
-var activeMappings = [...mappings];
 
 var activeMetaPrograms = "all";
 
 var mcd;
 var dropdown;
+var question
 
 
 function answerChosen(answer) {
-    if (answer !== correctAnswer) {
-        alert("Correct answer: " + correctAnswer);
+    if (! question.checkAnswer(answer)) {
+        alert("Correct answer: " + question.answer);
     };
 };
 
 function chooseSentence() {
     let sentence = mcd.randExample();
-    currentSentence = sentence.example;
-    correctAnswer = sentence.subCategory;
-    document.getElementById("sentence").innerHTML = currentSentence;
+    question.setSentence(sentence.example);
+    question.setAnswer(sentence.subCategory);
 };
 
 function selectMappings(choice) {
@@ -39,7 +25,7 @@ function selectMappings(choice) {
     if (dropdown.isOpen) {
         chooseSentence();
     } else {
-        document.getElementById("sentence").innerHTML = "";
+        question.clear();
     }
     dropdown.toggleOpen();
 
@@ -169,20 +155,20 @@ function getRandSubmodalities(amount) {
 };
 
 function getRandSentence(listFrom) {
-    document.getElementById("sentence").innerHTML = listFrom[Math.floor(Math.random() * listFrom.length)];
+    question.setSentence(listFrom[Math.floor(Math.random() * listFrom.length)]);
 }
 
 function getRandFromList(listFrom) {
     return listFrom[Math.floor(Math.random() * listFrom.length)];
 }
 
-// chooses a random enriched sentence, and appends it to document.getElementById("sentence")
+// chooses a random enriched sentence, and sets question to it
 function chooseRandEnrichedSentence() {
     let randMod = randFromList(Object.keys(enrichedLanguageSentences), 1)[0];
-    correctAnswer = randMod;
     let randES = randFromList(enrichedLanguageSentences[randMod], 1)[0];
 
-    document.getElementById("sentence").innerHTML = randES;
+    question.setAnswer(randMod);
+    question.setSentence(randES);
 };
 
 // this function chooses n random metaprograms, and puts them in the right h3
@@ -199,6 +185,31 @@ function chooseNextMetaPrograms(amountOfMetaPrograms) {
     for (let i = 0; i < amountOfMetaPrograms; i++) {
         document.getElementById("mp:" + (i + 1)).innerHTML =
             chosenPrograms[i] + ": " + randFromList(metaPrograms[chosenKey][chosenPrograms[i]], 1)[0];
+    }
+}
+
+class Question {
+    constructor(id) {
+        this.id = id;
+        makeH2("", "topDiv", this.id);
+    }
+
+    checkAnswer(answer) {
+        return answer === this.answer;
+    }
+
+    setAnswer(answer) {
+        this.answer = answer;
+    }
+
+    setSentence(sentence) {
+        this.sentence = sentence;
+        document.getElementById(this.id).innerHTML = this.sentence;
+    }
+
+    clear() {
+        this.setAnswer("");
+        this.setSentence("");
     }
 }
 
@@ -295,7 +306,9 @@ function startMetaModelTrainer1() {
     clearIndex();
     // document.getElementById("title").innerHTML = "Meta Model Trainer 1 (Beginner)";
     document.getElementById("title").innerHTML = "Asking Specific Questions";
-    makeH2("", "topDiv", "sentence");
+    question = new Question("sentence");
+    question.clear();
+    
 
     mcd = new MultipleChoiceDict(metaModelSentences);
 
@@ -330,7 +343,7 @@ function startEnrichedLanguageTrainer1() {
     document.getElementById("title").innerHTML = "Enriched Language Trainer 1 (Beginner)";
     document.getElementById("bottomDiv").style.display = "flex";
     document.getElementById("bottomDiv").style.margin = "100px";
-    makeH2("", "topDiv", "sentence");
+    question = new Question("sentence")
     chooseRandEnrichedSentence();
 
     makeAnswerButton("Visual", "answerButton answer:visual", "bottomDiv", function () { answerChosen("visual"); chooseRandEnrichedSentence(); })
@@ -341,7 +354,7 @@ function startEnrichedLanguageTrainer1() {
 
 function startEnrichedLanguageTrainer2() {
     document.getElementById("title").innerHTML = "Enriched Language Trainer 2 (Advanced)";
-    makeH2("", "topDiv", "sentence");
+    question = new Question("sentence")
     makeH3("", "topDiv", "submods");
     makeTextArea("textarea", "bottomDiv");
 
@@ -363,7 +376,7 @@ function startEnrichedLanguageTrainer2() {
 function startIntentionReframeTrainer1() {
     document.getElementById("title").innerHTML = "Intention Reframe Trainer 1";
 
-    makeH2("a", "topDiv", "sentence");
+    question = new Question("sentence")
     getRandSentence(negativeBehaviours);
 
     for (let i = 0; i < basicNeeds.length; i++) {
@@ -384,7 +397,7 @@ function startIntentionReframeTrainer1() {
 function startLogicalLevelsTrainer1() {
     document.getElementById("title").innerHTML = "Logical Levels Trainer 1";
 
-    makeH2("a", "topDiv", "sentence");
+    question = new Question("sentence")
     getRandSentence(negativeBehaviours);
 
     for (let i = 0; i < logicalLevels.length; i++) {
@@ -405,7 +418,7 @@ function startLogicalLevelsTrainer1() {
 function startReframingTrainer1() {
     document.getElementById("title").innerHTML = "Reframing Trainer 1";
 
-    makeH2("a", "topDiv", "sentence");
+    question = new Question("sentence")
     getRandSentence(negativeBehaviours);
 
     let chosenFrames = randFromList(frames, 3);
@@ -432,7 +445,7 @@ function startMetaProgramTrainer1() {
 
     dropdown.clearContent();
     dropdown.toggleVisibility(true);
-    makeH2("", "topDiv", "sentence");
+    question = new Question("sentence")
 
     makeDropdownButton("Motivation", function () { activeMetaPrograms = "motivation"; dropdown.toggleOpen(); });
     makeDropdownButton("Productivity", function () { activeMetaPrograms = "productivity"; dropdown.toggleOpen(); });
@@ -517,7 +530,7 @@ function selectTraining(trainingCode) {
 window.addEventListener("load", function () {
     clearIndex();
     dropdown = new Dropdown("dropdown", "selectionDropdown");
-
+    question = new Question("sentence")
 
     // startEnrichedLanguageTrainer2();
     startMetaModelTrainer1();
