@@ -1,8 +1,10 @@
 
 
 var enrichedLanguageSentences = {
-
-    visual: `
+    sentences: {
+        visual: {
+            examples:
+                `
         I saw the apple.
         The apple lay there.
         The ball was huge. 
@@ -14,51 +16,54 @@ var enrichedLanguageSentences = {
         Everything looked fuzzy that day. 
         I saw her sitting to the left of me.
         Visual
-    • I saw him
-    • He saw me
-    • The tomatoes in the garden were large
-    • The Opera House was smaller than you would think
-    • The pen was too small for his hands
-    • The alien life forms waving at him were tiny
-    • The old oak tree towered over the little shed
-    • The young woman sitting opposite him stared straight ahead for the entire journey
-    • The girl's eyes darted around the room, not knowing where to rest
-    • The old man slowly got up from where he had been sitting
-    • The clouds drifted by as if they had somewhere urgent to be
-    • The tiger jumped out of the bushes with incredible speed
-    • His breathing was fast and uncontrolled
-    • It was a grey day
-    • The theme park was ever so colourful
-    • The film was in black and white
-    • The lady's neck turned red
-    • The rainbow faded away, leaving the sky greyer than before
-    • The train was brightly lit by the cold light of the TL-lights
-    • The hedgehog stared into the bright headlights
-    • Only the weak light of the moon gave the forest form
-    • The light was fading and it became more difficult to see her face
-    • The hotel lobby was dimly lit
-    • From the mountain the village looked so far
-    • She sat down next to her, barely leaving space between them
-    • The seats were only two rows from the emergency exit
-    • Had there been no glass, she could have stretched her right arm out and stroked his cheek
-    • He turned to say something, but she was already too far to hear him
-    • He couldn't focus on the lecture; he kept looking for something else to look at
-    • The streets seemed to stare at him attentively
-    • The world lost its focus
-    • His eyes were focused solely on the chair in front of him
-    • When he tried to recall his own face, he saw only a blur
-    • The rain on the window blended the lights of the city together into a neon milkshake
-    • He couldn't make out his grandmother's face until she stepped onto the platform, out of the fog
-    • The alcohol made his sight fuzzy
-    • The cocaine cleared her mind
-    • On the floor lay a piece of paper
-    • A train came in from the left
-    • Her right hand now held a knife
-    • The student looked up and locked eyes with the teacher
-    • Down at the gate, a man got out of a car
-    `,
+        • I saw him
+        • He saw me
+        • The tomatoes in the garden were large
+        • The Opera House was smaller than you would think
+        • The pen was too small for his hands
+        • The alien life forms waving at him were tiny
+        • The old oak tree towered over the little shed
+        • The young woman sitting opposite him stared straight ahead for the entire journey
+        • The girl's eyes darted around the room, not knowing where to rest
+        • The old man slowly got up from where he had been sitting
+        • The clouds drifted by as if they had somewhere urgent to be
+        • The tiger jumped out of the bushes with incredible speed
+        • His breathing was fast and uncontrolled
+        • It was a grey day
+        • The theme park was ever so colourful
+        • The film was in black and white
+        • The lady's neck turned red
+        • The rainbow faded away, leaving the sky greyer than before
+        • The train was brightly lit by the cold light of the TL-lights
+        • The hedgehog stared into the bright headlights
+        • Only the weak light of the moon gave the forest form
+        • The light was fading and it became more difficult to see her face
+        • The hotel lobby was dimly lit
+        • From the mountain the village looked so far
+        • She sat down next to her, barely leaving space between them
+        • The seats were only two rows from the emergency exit
+        • Had there been no glass, she could have stretched her right arm out and stroked his cheek
+        • He turned to say something, but she was already too far to hear him
+        • He couldn't focus on the lecture; he kept looking for something else to look at
+        • The streets seemed to stare at him attentively
+        • The world lost its focus
+        • His eyes were focused solely on the chair in front of him
+        • When he tried to recall his own face, he saw only a blur
+        • The rain on the window blended the lights of the city together into a neon milkshake
+        • He couldn't make out his grandmother's face until she stepped onto the platform, out of the fog
+        • The alcohol made his sight fuzzy
+        • The cocaine cleared her mind
+        • On the floor lay a piece of paper
+        • A train came in from the left
+        • Her right hand now held a knife
+        • The student looked up and locked eyes with the teacher
+        • Down at the gate, a man got out of a car
+       `
+        },
 
-    audio: `
+        audio: {
+            examples:
+                `
         Her voice echoed from all walls of the room.
         It was the end of the day and my voice had become completely monotone.
         To make sure everyone understood me, I spoke very slowly.
@@ -107,9 +112,12 @@ var enrichedLanguageSentences = {
         • He couldn't find a rhythm in his speech
         • All she heard was the cadence of his dangling keys
         • Your presentation was disturbed by the scream in the distance and you never found your rhythm again
-    `,
+    `
+        },
 
-    kinesthetic: `
+        kinesthetic: {
+            examples:
+                `
         I felt something in my chest.
         My head was buzzing.
         The meeting moved on slowly. 
@@ -173,7 +181,9 @@ var enrichedLanguageSentences = {
         • The essence in the air was a sour one
         • Her cakes tasted like a summer breeze
         • Kate welcomed the salty wind of the North sea
-    `,
+    `
+        }
+    }
 };
 
 var modalityNeutralSentences =
@@ -218,12 +228,12 @@ var modalities1 = {
 
 
 // turn string of sentences in modalities into arrrays
-for (var [key, value] of Object.entries(enrichedLanguageSentences)) {
-    enrichedLanguageSentences[key] = value.split("\n").slice(1, -1);
-    for (let i = 0; i < enrichedLanguageSentences[key].length; i++) {
-        enrichedLanguageSentences[key][i] = enrichedLanguageSentences[key][i].replace('•', '').trim();
-    }
-};
+// for (var [key, value] of Object.entries(enrichedLanguageSentences)) {
+//     enrichedLanguageSentences[key] = value.split("\n").slice(1, -1);
+//     for (let i = 0; i < enrichedLanguageSentences[key].length; i++) {
+//         enrichedLanguageSentences[key][i] = enrichedLanguageSentences[key][i].replace('•', '').trim();
+//     }
+// };
 
 // turn string of neutral sentences into arrays
 modalityNeutralSentences = modalityNeutralSentences.split("\n").slice(1, -1);

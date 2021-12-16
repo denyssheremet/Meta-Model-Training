@@ -76,7 +76,7 @@ var metaModelSentences = {
     He is wrong 
     It's perfect
     I know 
-    It's all wrong
+    I feel
     I feel curious 
     I don't want to
     Never again 
@@ -303,16 +303,5 @@ var metaModelSentences = {
     I could eat an apple if I tried 
     I might do what he says I should do at 19:00
     `}
-    }
-}
-
-// Turn sentence strings into arrays
-for (var [k1, v1] of Object.entries(metaModelSentences)) {
-    for (var [key, value] of Object.entries(metaModelSentences[k1])) {
-        metaModelSentences[k1][key].examples = value.examples.split("\n").slice(1, -1);
-        // Trim spaces around sentences
-        for (let i = 0; i < metaModelSentences[k1][key].examples.length; i++) {
-            metaModelSentences[k1][key].examples[i] = metaModelSentences[k1][key].examples[i].trim();
-        }
     }
 }

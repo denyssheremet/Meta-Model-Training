@@ -8,7 +8,7 @@ var question
 
 
 function answerChosen(answer) {
-    if (! question.checkAnswer(answer)) {
+    if (!question.checkAnswer(answer)) {
         alert("Correct answer: " + question.answer);
     };
 };
@@ -211,6 +211,12 @@ class Question {
         this.setAnswer("");
         this.setSentence("");
     }
+
+    chooseNextQuestion() {
+        let example = mcd.randExample();
+        this.setSentence(example.example);
+        this.setAnswer(example.subCategory);
+    }
 }
 
 class Dropdown {
@@ -297,6 +303,19 @@ class MultipleChoiceDict {
         }
         return this.randExample(this.chosenCategory);
     }
+
+    static formatDict(dict) {
+        // Turn sentence strings into arrays
+        for (var [k1, v1] of Object.entries(dict)) {
+            for (var [key, value] of Object.entries(dict[k1])) {
+                dict[k1][key].examples = value.examples.split("\n").slice(1, -1);
+                // Trim spaces around sentences
+                for (let i = 0; i < dict[k1][key].examples.length; i++) {
+                    dict[k1][key].examples[i] = dict[k1][key].examples[i].replace('•', '').trim();
+                }
+            }
+        }
+    }
 }
 
 
@@ -308,7 +327,7 @@ function startMetaModelTrainer1() {
     document.getElementById("title").innerHTML = "Asking Specific Questions";
     question = new Question();
     question.clear();
-    
+
 
     mcd = new MultipleChoiceDict(metaModelSentences);
 
@@ -319,10 +338,10 @@ function startMetaModelTrainer1() {
         makeH2(category, category + "Buttons");
 
         // generate answer buttons
-        for (let i = 0; i < mcd.getSubCategoryKeys(category).length; i++) {
-            let subCategory = mcd.getSubCategoryKeys(category)[i];
+        for (let j = 0; j < mcd.getSubCategoryKeys(category).length; j++) {
+            let subCategory = mcd.getSubCategoryKeys(category)[j];
             makeAnswerButton(subCategory, category, category + "Buttons", function () {
-                answerChosen(subCategory); chooseSentence(mcd);
+                answerChosen(subCategory); chooseSentence();
             });
         }
     }
@@ -344,12 +363,21 @@ function startEnrichedLanguageTrainer1() {
     document.getElementById("bottomDiv").style.display = "flex";
     document.getElementById("bottomDiv").style.margin = "100px";
     question = new Question()
-    chooseRandEnrichedSentence();
 
-    makeAnswerButton("Visual", "answerButton answer:visual", "bottomDiv", function () { answerChosen("visual"); chooseRandEnrichedSentence(); })
-    makeAnswerButton("Audio", "answerButton answer:audio", "bottomDiv", function () { answerChosen("audio"); chooseRandEnrichedSentence(); })
-    makeAnswerButton("Kinesthetic", "answerButton answer:kinesthetic", "bottomDiv", function () { answerChosen("kinesthetic"); chooseRandEnrichedSentence(); })
+    mcd = new MultipleChoiceDict(enrichedLanguageSentences);
 
+    question.chooseNextQuestion();
+
+    // make answer buttons
+    for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
+        let category = mcd.getCategoryKeys()[i];
+
+        for (let j = 0; j < mcd.getSubCategoryKeys(category).length; j++) {
+            let subCategory = mcd.getSubCategoryKeys(category)[j];
+            makeAnswerButton(subCategory, "answerButton answer:" + subCategory, "bottomDiv",
+                function () { answerChosen(subCategory); question.chooseNextQuestion(); })
+        }
+    }
 }
 
 function startEnrichedLanguageTrainer2() {
@@ -488,6 +516,8 @@ function startMetaProgramTrainer1() {
 function clearIndex() {
     document.getElementById("topDiv").innerHTML = "";
     document.getElementById("bottomDiv").innerHTML = "";
+    document.getElementById("bottomDiv").style.display = "block";
+    document.getElementById("bottomDiv").style.margin = "0px";
     document.getElementById("title").innerHTML = "";
     if (dropdown != null) {
         dropdown.toggleVisibility(false);
@@ -528,12 +558,18 @@ function selectTraining(trainingCode) {
 }
 
 window.addEventListener("load", function () {
+
+    MultipleChoiceDict.formatDict(enrichedLanguageSentences);
+    MultipleChoiceDict.formatDict(metaModelSentences);
+
+
     clearIndex();
     dropdown = new Dropdown("dropdown", "selectionDropdown");
     question = new Question()
 
+    // startMetaModelTrainer1();
+    startEnrichedLanguageTrainer1();
     // startEnrichedLanguageTrainer2();
-    startMetaModelTrainer1();
     // startIntentionReframeTrainer1();
     // startLogicalLevelsTrainer1();
     // startMetaProgramTrainer1();
