@@ -31,17 +31,43 @@ The user sees a statement and a Milton Pattern, and needs to apply the pattern t
 Milton Model Training 3 (Advanced):
 The user sees a statement, and multiple Milton patterns. He needs to apply all patterns to the statement.
 
+Meta Programs Training 1 (Beginner):
+The user sees a meta program or MBTI element, and needs to formulate a question to find out someone's meta program.
+
+Meta Programs Training 2 (Intermediate): 
+The user sees a sentence or paragraph, and needs to select which meta programs can be deducted from it. 
+
+Meta Programs Training 3 (Expert):
+The user sees a statement, job offer, or product offer, and a list of 1, 2, or 3 meta programs, and needs to rephrase the statement to suit those meta programs.
+
+Meta Program Pattern Trainer 4:
+The user sees a meta program pattern (e.g. Macho Test) and an advice, and needs to formulate that advice using the pattern.
+
+Pacing & Leading Trainer: 
+The user sees a form of pacing and leading, a topic, and a connecting word, and needs to write a pace.
+
+Rapport Trainer: 
+See 3 rapport Techniques and a situation. Then, write out how you would use it there. 
+
+Induction Trainer: 
+User sees a topic and an induction type (e.g. stacking realities) and needs to write an induction about that topic.
+
+Pattern Interrupt Training: 
+TBD
+Reference: https://happyrubin.com/nlp/breaking-patterns/
+
+Provocative Coaching Training 1 (Beginner): 
+The user sees an example of an provocative coaching technique, and needs to choose which one was being used. 
+
+Provocative Coaching Training 2 (Intermediate): 
+User sees a problem, and a provocative coaching technique. Then the user needs to write out how to apply the technique to the problem. 
+Reference: https://happyrubin.com/nlp/provocative-coaching/
+
 Intention Reframe Training: 
 User sees a bad behaviour, needs to find the positive intent and basic human need behind it, and do an intent reframe based on it. 
 
 Negotiation Model Training:
 Behaviour -> Chunk up to Positive Intention -> Chunk down to better Positive Intention.
-
-Pacing & Leading Trainer: 
-The user sees a form of pacing and leading, a topic, and a connecting word, and needs to write a pace.
-
-Induction Trainer: 
-User sees a topic and an induction type (e.g. stacking realities) and needs to write an induction about that topic.
 
 Alphabet Game Generator: 
 An alphabet game chart gets automatically generated. 
@@ -66,16 +92,7 @@ Shifting the Frame Training:
 The user gets a statement or idea, and needs to widen, narrow, or shift the frame.
 
 Chunking the Frame Training: 
-The user gets a statement or idea, and needs to chunk the idea up, down, or laterally. 
-
-Meta Programs Training 1 (Beginner):
-The user sees a meta program or MBTI element, and needs to formulate a question to find out someone's meta program.
-
-Meta Programs Training 2 (Intermediate): 
-The user sees a sentence or paragraph, and needs to select which meta programs can be deducted from it. 
-
-Meta Programs Training 3 (Expert):
-The user sees a statement, job offer, or product offer, and a list of 1, 2, or 3 meta programs, and needs to rephrase the statement to suit those meta programs. 
+The user gets a statement or idea, and needs to chunk the idea up, down, or laterally.  
 
 Levels of Intimacy / Dilts Logical Levels Training 1 (Beginner): 
 The user sees a statement or question in one of the levels and needs to choose the level at which the statement is. 
@@ -108,17 +125,6 @@ The user sees a video of a speaker, and 1, 2 or 3 questions about his modalities
 
 Body Language Training 3 (Expert):
 The user sees a video of a speaker, and 1, 2 or 3 questions about his modalities, meta programs, eye accesing, autonomic nervous system. The user needs to look and listen to the speaker closely and when the video ends, continue talking while mirroring the speaker.
-
-Provocative Coaching Training 1 (Beginner): 
-The user sees an example of an provocative coaching technique, and needs to choose which one was being used. 
-
-Provocative Coaching Training 2 (Intermediate): 
-User sees a problem, and a provocative coaching technique. Then the user needs to write out how to apply the technique to the problem. 
-Reference: https://happyrubin.com/nlp/provocative-coaching/
-
-Pattern Interrupt Training: 
-TBD
-Reference: https://happyrubin.com/nlp/breaking-patterns/
 
 NLP Presuppositions Training:
 The user sees a statement, and has to say which NLP presupposition it breaks.

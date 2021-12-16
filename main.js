@@ -378,10 +378,7 @@ function startMetaProgramTrainer1() {
         if (key == 13) {
 
             for (let i = 0; i < contexts.length; i++) {
-                console.log(document.getElementById("textarea" + (i + 1)).value);
                 document.getElementById("textarea" + (i + 1)).value = "";
-                console.log("textarea" + (i + 1));
-                console.log(document.getElementById("textarea" + (i + 1)).value);
             }
             chooseNextMetaPrograms();
         }
@@ -433,7 +430,9 @@ window.addEventListener("load", function () {
     // startMetaModelTrainer1();
     // startIntentionReframeTrainer1();
     // startLogicalLevelsTrainer1();
-    // startMetaProgramTrainer1();
-    startReframingTrainer1();
+    startMetaProgramTrainer1();
+    // startReframingTrainer1();
+
+    console.log(miltonPatterns.length);
 });
 
