@@ -303,13 +303,10 @@ var metaModelSentences = {
 }
 
 // Turn sentence strings into arrays
-var sentencesLength = 0;
 for (var [key, value] of Object.entries(metaModelSentences)) {
     metaModelSentences[key].examples = value.examples.split("\n").slice(1, -1);
     // Trim spaces around sentences
     for (let i = 0; i < metaModelSentences[key].examples.length; i++) {
         metaModelSentences[key].examples[i] = metaModelSentences[key].examples[i].trim();
     }
-    sentencesLength += metaModelSentences[key].examples.length;
 }
-metaModelSentences["size"] = sentencesLength;

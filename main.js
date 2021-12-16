@@ -223,11 +223,34 @@ function chooseNextMetaPrograms(amountOfMetaPrograms) {
     }
 }
 
+class MultipleChoiceDict {
+    constructor(dict) {
+        this.dict = dict;                   // the dictionary
+        this.keys = Object.keys(this.dict);      // the keys
+    }
+
+    randCategory() {
+        return randFromList(this.keys, 1)[0];
+    }
+
+    randExample(category = null) {
+        if (category) {
+            return randFromList(this.dict[category].examples, 1)[0];
+        }
+        return this.randExample(this.randCategory());
+    }
+}
+
+
+
 // starts Meta Model Trainer 1
 function startMetaModelTrainer1() {
     clearIndex();
     // document.getElementById("title").innerHTML = "Meta Model Trainer 1 (Beginner)";
     document.getElementById("title").innerHTML = "Asking Specific Questions";
+    
+    let mcd = new MultipleChoiceDict(metaModelSentences);
+    
 
     document.getElementById("selectionDropdown").innerHTML = "";
     document.getElementById("dropdown").style.display = "block";
@@ -450,10 +473,10 @@ function selectTraining(trainingCode) {
 window.addEventListener("load", function () {
     clearIndex();
     // startEnrichedLanguageTrainer2();
-    // startMetaModelTrainer1();
+    startMetaModelTrainer1();
     // startIntentionReframeTrainer1();
     // startLogicalLevelsTrainer1();
-    startMetaProgramTrainer1();
+    // startMetaProgramTrainer1();
     // startReframingTrainer1();
 
     console.log(miltonPatterns.length);
