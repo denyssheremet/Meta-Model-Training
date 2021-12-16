@@ -304,6 +304,11 @@ class MultipleChoiceDict {
         return this.randExample(this.chosenCategory);
     }
 
+    randSubCategories(amount) {
+        let randCat = this.randCategory();
+        return randFromList(this.getSubCategoryKeys(randCat), amount);
+    }
+
     static formatDict(dict) {
         // Turn sentence strings into arrays
         for (var [k1, v1] of Object.entries(dict)) {
@@ -321,15 +326,14 @@ class MultipleChoiceDict {
 
 
 // starts Meta Model Trainer 1
-function startMetaModelTrainer1() {
+function startMultipleChoiceTrainer(dict, title) {
     clearIndex();
-    // document.getElementById("title").innerHTML = "Meta Model Trainer 1 (Beginner)";
-    document.getElementById("title").innerHTML = "Asking Specific Questions";
+    document.getElementById("title").innerHTML = title;
     question = new Question();
     question.clear();
 
 
-    mcd = new MultipleChoiceDict(metaModelSentences);
+    mcd = new MultipleChoiceDict(dict);
 
     // make div for each category
     for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
@@ -357,6 +361,44 @@ function startMetaModelTrainer1() {
     }
     makeDropdownButton("All", function () { selectMappings("all"); });
 };
+
+// starts Meta Program Trainer 1
+function startMetaProgramTrainer1() {
+    clearIndex();
+    document.getElementById("title").innerHTML = "Meta Program Trainer 1 (Beginner)";
+    question = new Question();
+    question.clear();
+
+
+    mcd = new MultipleChoiceDict(metaProgramsMC);
+
+    // make div for each category
+    for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
+        let category = mcd.getCategoryKeys()[i];
+        makeDiv(category + "Buttons", "bottomDiv", category);
+        makeH2(category, category + "Buttons");
+
+        // generate answer buttons
+        for (let j = 0; j < mcd.getSubCategoryKeys(category).length; j++) {
+            let subCategory = mcd.getSubCategoryKeys(category)[j];
+            makeAnswerButton(subCategory, category, category + "Buttons", function () {
+                answerChosen(subCategory); chooseSentence();
+            });
+        }
+    }
+    chooseSentence();
+
+    // make dropdown
+    dropdown.clearContent();
+    dropdown.toggleVisibility(true);
+
+    for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
+        let category = mcd.getCategoryKeys()[i];
+        makeDropdownButton(category, function () { selectMappings(category); });
+    }
+    makeDropdownButton("All", function () { selectMappings("all"); });
+};
+
 
 function startEnrichedLanguageTrainer1() {
     document.getElementById("title").innerHTML = "Enriched Language Trainer 1 (Beginner)";
@@ -467,13 +509,50 @@ function startReframingTrainer1() {
     };
 }
 
-function startMetaProgramTrainer1() {
-    document.getElementById("title").innerHTML = "Meta Program Trainer 1";
+// // starts Meta Program Trainer 1
+// function startMetaProgramTrainer1() {
+//     clearIndex();
+//     document.getElementById("title").innerHTML = "Meta Program Trainer 1";
+//     question = new Question();
+//     question.clear();
+
+
+//     mcd = new MultipleChoiceDict(metaProgramsMC);
+
+//     // make div for each category
+//     for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
+//         let category = mcd.getCategoryKeys()[i];
+//         makeDiv(category + "Buttons", "bottomDiv", category);
+//         makeH2(category, category + "Buttons");
+
+//         // generate answer buttons
+//         for (let j = 0; j < mcd.getSubCategoryKeys(category).length; j++) {
+//             let subCategory = mcd.getSubCategoryKeys(category)[j];
+//             makeAnswerButton(subCategory, category, category + "Buttons", function () {
+//                 answerChosen(subCategory); chooseSentence();
+//             });
+//         }
+//     }
+//     chooseSentence();
+
+//     // make dropdown
+//     dropdown.clearContent();
+//     dropdown.toggleVisibility(true);
+
+//     for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
+//         let category = mcd.getCategoryKeys()[i];
+//         makeDropdownButton(category, function () { selectMappings(category); });
+//     }
+//     makeDropdownButton("All", function () { selectMappings("all"); });
+// };
+
+function startMetaProgramTrainer2() {
+    document.getElementById("title").innerHTML = "Meta Program Trainer 2";
     let amountOfMetaPrograms = 5;
 
     dropdown.clearContent();
     dropdown.toggleVisibility(true);
-    question = new Question()
+    question = new Question();    
 
     makeDropdownButton("Motivation", function () { activeMetaPrograms = "motivation"; dropdown.toggleOpen(); });
     makeDropdownButton("Productivity", function () { activeMetaPrograms = "productivity"; dropdown.toggleOpen(); });
@@ -540,7 +619,7 @@ function selectTraining(trainingCode) {
     showTrainings();
     clearIndex();
     switch (trainingCode) {
-        case "MMT1": startMetaModelTrainer1();
+        case "MMT1": startMultipleChoiceTrainer(metaModelSentences, "Meta Model Trainer 1 (Beginner)");
             break;
         case "ELT1": startEnrichedLanguageTrainer1();
             break;
@@ -550,7 +629,7 @@ function selectTraining(trainingCode) {
             break;
         case "LLT1": startLogicalLevelsTrainer1();
             break;
-        case "MPT1": startMetaProgramTrainer1();
+        case "MPT1": startMultipleChoiceTrainer(metaProgramsMC, "Meta Program Trainer 1");
             break;
         case "MPT1": startReframingTrainer1();
             break;
@@ -561,6 +640,7 @@ window.addEventListener("load", function () {
 
     MultipleChoiceDict.formatDict(enrichedLanguageSentences);
     MultipleChoiceDict.formatDict(metaModelSentences);
+    MultipleChoiceDict.formatDict(metaProgramsMC);
 
 
     clearIndex();
@@ -568,12 +648,13 @@ window.addEventListener("load", function () {
     question = new Question()
 
     // startMetaModelTrainer1();
-    startEnrichedLanguageTrainer1();
+    // startEnrichedLanguageTrainer1();
     // startEnrichedLanguageTrainer2();
     // startIntentionReframeTrainer1();
     // startLogicalLevelsTrainer1();
-    // startMetaProgramTrainer1();
+    // startMetaProgramTrainer2();
     // startReframingTrainer1();
+    selectTraining("MPT1");
 
 });
 
