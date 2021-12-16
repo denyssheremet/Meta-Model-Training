@@ -12,22 +12,13 @@ var correctAnswer = "";
 var currentMod = "";
 
 var trainingDropdownOpen = false;
-var dropdownShowing = false;
 var activeMappings = [...mappings];
 
 var activeMetaPrograms = "all";
 
 var mcd;
+var dropdown;
 
-
-function showDropdown() {
-    if (dropdownShowing) {
-        document.getElementById("selectionDropdown").style.display = "none";
-    } else {
-        document.getElementById("selectionDropdown").style.display = "block";
-    }
-    dropdownShowing = !dropdownShowing;
-}
 
 function answerChosen(answer) {
     if (answer !== correctAnswer) {
@@ -45,14 +36,12 @@ function chooseSentence() {
 function selectMappings(choice) {
     mcd.chosenCategory = choice;
 
-    if (dropdownShowing) {
+    if (dropdown.isOpen) {
         chooseSentence();
     } else {
         document.getElementById("sentence").innerHTML = "";
     }
-    console.log(dropdownShowing);
-    showDropdown();
-
+    dropdown.toggleOpen();
 
     // make buttons selected or unselected
     let allDropdownButtons = document.getElementsByClassName("dropdownButton");
@@ -123,7 +112,7 @@ function makeDropdownButton(name, func) {
     btn.className = "dropdownButton dropdown:" + name.toLowerCase();
     btn.innerHTML = name;
     btn.onclick = func;
-    document.getElementById("selectionDropdown").appendChild(btn);
+    document.getElementById(dropdown.contentId).appendChild(btn);
 }
 
 function makeTextArea(id, appendTo, placeholder = "", small = false) {
@@ -213,6 +202,40 @@ function chooseNextMetaPrograms(amountOfMetaPrograms) {
     }
 }
 
+class Dropdown {
+    constructor(id, contentId) {
+        this.id = id;
+        this.contentId = contentId;
+        this.isVisible = true;
+        this.isOpen = false;
+    }
+
+    toggleVisibility(open = null) {
+        if (open == true || (open === null && !this.isVisible)) {
+            document.getElementById(this.id).style.display = "block";
+            this.isVisible = true;
+        } else {
+            document.getElementById(this.id).style.display = "none";
+            this.isVisible = false;
+        }
+    }
+
+    toggleOpen() {
+        this.isOpen = !this.isOpen;
+
+        if (this.isOpen) {
+            document.getElementById(this.contentId).style.display = "block";
+        } else {
+            document.getElementById(this.contentId).style.display = "none";
+        }
+    }
+
+    clearContent() {
+        document.getElementById(this.contentId).innerHTML = "";
+    }
+
+}
+
 class Sentence {
     constructor(category, subCategory, example) {
         this.category = category;
@@ -293,47 +316,14 @@ function startMetaModelTrainer1() {
     chooseSentence();
 
     // make dropdown
-    document.getElementById("selectionDropdown").innerHTML = "";
-    document.getElementById("dropdown").style.display = "block";
+    dropdown.clearContent();
+    dropdown.toggleVisibility(true);
 
     for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
         let category = mcd.getCategoryKeys()[i];
         makeDropdownButton(category, function () { selectMappings(category); });
     }
     makeDropdownButton("All", function () { selectMappings("all"); });
-
-
-    // document.getElementById("selectionDropdown").innerHTML = "";
-    // document.getElementById("dropdown").style.display = "block";
-    // makeH2("", "topDiv", "sentence");
-
-    // makeDropdownButton("Deletion", function () { selectMappings("deletion"); });
-    // makeDropdownButton("Distortion", function () { selectMappings("distortion"); });
-    // makeDropdownButton("Generalization", function () { selectMappings("generalization"); });
-    // makeDropdownButton("All", function () { selectMappings("all"); });
-
-
-
-    // // generate Buttons for different answers
-    // makeDiv("deletionButtons", "bottomDiv", "Deletion");
-    // makeH2("Deletions", "deletionButtons");
-    // makeDiv("deletionDropdown", "selectionDropdown", "");
-    // for (let i = 0; i < deletions.length; i++) {
-    //     makeAnswerButton(deletions[i], "deletion", "deletionButtons", function () { answerChosen(deletions[i]); chooseSentence(); });
-    // }
-    // makeDiv("distortionButtons", "bottomDiv", "Distortion");
-    // makeH2("Distortions", "distortionButtons");
-    // makeDiv("distortionDropdown", "selectionDropdown", "");
-    // for (let i = 0; i < distortions.length; i++) {
-    //     makeAnswerButton(distortions[i], "distortion", "distortionButtons", function () { answerChosen(distortions[i]); chooseSentence(); });
-    // }
-    // makeDiv("generalizationButtons", "bottomDiv", "Generalization");
-    // makeH2("Generalizations", "generalizationButtons");
-    // makeDiv("generalizationDropdown", "selectionDropdown", "");
-    // for (let i = 0; i < generalizations.length; i++) {
-    //     makeAnswerButton(generalizations[i], "generalization", "generalizationButtons", function () { answerChosen(generalizations[i]); chooseSentence(); });
-    // }
-    // chooseSentence();
 };
 
 function startEnrichedLanguageTrainer1() {
@@ -431,7 +421,6 @@ function startReframingTrainer1() {
                 document.getElementById("textarea" + (i + 1)).value = "";
                 document.getElementById("textarea" + (i + 1)).placeholder = chosenFrames[i];
             }
-            console.log("yes)")
             getRandSentence(negativeBehaviours);
         }
     };
@@ -441,13 +430,13 @@ function startMetaProgramTrainer1() {
     document.getElementById("title").innerHTML = "Meta Program Trainer 1";
     let amountOfMetaPrograms = 5;
 
-    document.getElementById("selectionDropdown").innerHTML = "";
-    document.getElementById("dropdown").style.display = "block";
+    dropdown.clearContent();
+    dropdown.toggleVisibility(true);
     makeH2("", "topDiv", "sentence");
 
-    makeDropdownButton("Motivation", function () { activeMetaPrograms = "motivation"; showDropdown(); });
-    makeDropdownButton("Productivity", function () { activeMetaPrograms = "productivity"; showDropdown(); });
-    makeDropdownButton("All", function () { activeMetaPrograms = "all"; showDropdown(); });
+    makeDropdownButton("Motivation", function () { activeMetaPrograms = "motivation"; dropdown.toggleOpen(); });
+    makeDropdownButton("Productivity", function () { activeMetaPrograms = "productivity"; dropdown.toggleOpen(); });
+    makeDropdownButton("All", function () { activeMetaPrograms = "all"; dropdown.toggleOpen(); });
 
 
     // create div inside topDiv
@@ -487,7 +476,9 @@ function clearIndex() {
     document.getElementById("topDiv").innerHTML = "";
     document.getElementById("bottomDiv").innerHTML = "";
     document.getElementById("title").innerHTML = "";
-    document.getElementById("dropdown").style.display = "none";
+    if (dropdown != null) {
+        dropdown.toggleVisibility(false);
+    }
     if (mcd != null) {
         mcd.chosenCategory = "all";
     }
@@ -525,6 +516,8 @@ function selectTraining(trainingCode) {
 
 window.addEventListener("load", function () {
     clearIndex();
+    dropdown = new Dropdown("dropdown", "selectionDropdown");
+
 
     // startEnrichedLanguageTrainer2();
     startMetaModelTrainer1();
