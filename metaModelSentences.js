@@ -1,9 +1,9 @@
 
 var metaModelSentences = {
-
-    "Unspecified Noun": {
-        examples:
-        `
+    deletion: {
+        "Unspecified Noun": {
+            examples:
+                `
     I want a change
     It's terrible 
     I have lots of skills
@@ -24,7 +24,7 @@ var metaModelSentences = {
     People are stupid
     They should know better 
     It needs to be done properly
-    People make mistake 
+    People make mistakes
     Those people need to be disciplined
     Those products are expensive 
     One knows what's best
@@ -43,9 +43,9 @@ var metaModelSentences = {
     I like food
     `},
 
-    "Unspecified Verb": {
-        examples:
-        `
+        "Unspecified Verb": {
+            examples:
+                `
     She rejected me
     I'm enjoying this
     I calmed the customer down 
@@ -64,9 +64,54 @@ var metaModelSentences = {
     Let's go!
     `},
 
-    "Nominalization": {
-        examples:
-        `
+        "Simple Deletion": {
+            examples:
+                `
+    I'm unhappy
+    You can't Help me
+    I'm fed up 
+    I'm sad
+    We can manage 
+    I just can't start
+    He is wrong 
+    It's perfect
+    I know 
+    It's all wrong
+    I feel curious 
+    I don't want to
+    Never again 
+    He can't
+    You must not do that 
+    Stop it
+    `},
+
+        "Comparative Deletion": {
+            examples:
+                `
+    Our new product is more effective
+    It's for the greater good 
+    He's more sensitive
+    Soccer is better 
+    She goes further
+    This is far more efficient 
+    You look happier
+    Hard beds are better 
+    He's more tolerant
+    She's much brighter 
+    This is more complicated
+    This is more like it 
+    Green is calmer
+    She's more fun 
+    This is getting much easier
+    Blue is better 
+    I'm enjoying this so much more
+    `},
+    },
+    distortion: {
+
+        "Nominalization": {
+            examples:
+                `
     I want recognition
     We have made our decision 
     Your work needs more attention
@@ -86,53 +131,10 @@ var metaModelSentences = {
     Decisions are hard
     `},
 
-    "Simple Deletion": {
-        examples:
-        `
-    I'm unhappy
-    You can't Help me
-    I'm fed up 
-    I'm sad
-    We can manage 
-    I just can't start
-    He is wrong 
-    It's perfect
-    I know 
-    It's all wrong
-    I feel curious 
-    I don't want to
-    Never again 
-    He can't
-    You must not do that 
-    Stop it
-    `},
-
-    "Comparative Deletion": {
-        examples:
-        `
-    Our new product is more effective
-    It's for the greater good 
-    He's more sensitive
-    Soccer is better 
-    She goes further
-    This is far more efficient 
-    You look happier
-    Hard beds are better 
-    He's more tolerant
-    She's much brighter 
-    This is more complicated
-    This is more like it 
-    Green is calmer
-    She's more fun 
-    This is getting much easier
-    Blue is better 
-    I'm enjoying this so much more
-    `},
-
-    "Complex Equivalence": {
-        examples:
-        `
-    He's silent…..He doesn't like what I've done
+        "Complex Equivalence": {
+            examples:
+                `
+    He's silent... He doesn't like what I've done
     A good relationship means never having to say sorry
     To stay in this job I have to work harder
     You can't have a well paid job that is enjoyable too
@@ -147,9 +149,9 @@ var metaModelSentences = {
     She goes down to the gym so she must be healthy
     `},
 
-    "Lost Comparative": {
-        examples:
-        `
+        "Lost Comparative": {
+            examples:
+                `
     it's disaster to be made redundant
     People make mistakes
     Managers are overpaid
@@ -171,9 +173,9 @@ var metaModelSentences = {
     They've been at it again
     `},
 
-    "Mind Reading": {
-        examples:
-        `
+        "Mind Reading": {
+            examples:
+                `
     you don't rate me
     I know you don't believe me 
     She's really happy now
@@ -193,9 +195,9 @@ var metaModelSentences = {
     I know you're enjoying this
     `},
 
-    "Cause and Effect": {
-        examples:
-        `
+        "Cause and Effect": {
+            examples:
+                `
     He makes me cringe just by speaking
     Because of you I feel worthless
     This exercise will inspire me
@@ -215,10 +217,11 @@ var metaModelSentences = {
     I won't apply, they'll never give me the job
     Things always go wrong when she walks in here
     `},
-
-    "Presupposition": {
-        examples:
-        `
+    },
+    generalization: {
+        "Presupposition": {
+            examples:
+                `
     What are we going to do next?
     When this plan falls I'll say 'told you so'
     It will be easier when he leaves
@@ -236,9 +239,9 @@ var metaModelSentences = {
     I'll be happy when this is all over
     `},
 
-    "Universal Quantifiers": {
-        examples:
-        `
+        "Universal Quantifiers": {
+            examples:
+                `
     He never listens to me
     Nobody likes me 
     He always tells the truth
@@ -257,9 +260,9 @@ var metaModelSentences = {
     Doctors are always healthy
     `},
 
-    "Modal Operator of Necessity": {
-        examples:
-        `
+        "Modal Operator of Necessity": {
+            examples:
+                `
     I have to take care of her by feeding her grapes
     You and I shouldn't play tennis now
     You have to educate yourself well about how language works
@@ -279,9 +282,9 @@ var metaModelSentences = {
     You mustn't read this sentence right now
     `},
 
-    "Modal Operator of Possibility": {
-        examples:
-        `
+        "Modal Operator of Possibility": {
+            examples:
+                `
     I can't tell you the truth about what my given name is
     I can't go to your place now 
     I can't relax my right leg
@@ -300,13 +303,16 @@ var metaModelSentences = {
     I could eat an apple if I tried 
     I might do what he says I should do at 19:00
     `}
+    }
 }
 
 // Turn sentence strings into arrays
-for (var [key, value] of Object.entries(metaModelSentences)) {
-    metaModelSentences[key].examples = value.examples.split("\n").slice(1, -1);
-    // Trim spaces around sentences
-    for (let i = 0; i < metaModelSentences[key].examples.length; i++) {
-        metaModelSentences[key].examples[i] = metaModelSentences[key].examples[i].trim();
+for (var [k1, v1] of Object.entries(metaModelSentences)) {
+    for (var [key, value] of Object.entries(metaModelSentences[k1])) {
+        metaModelSentences[k1][key].examples = value.examples.split("\n").slice(1, -1);
+        // Trim spaces around sentences
+        for (let i = 0; i < metaModelSentences[k1][key].examples.length; i++) {
+            metaModelSentences[k1][key].examples[i] = metaModelSentences[k1][key].examples[i].trim();
+        }
     }
 }

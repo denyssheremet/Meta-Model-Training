@@ -14,9 +14,10 @@ var currentMod = "";
 var trainingDropdownOpen = false;
 var dropdownShowing = false;
 var activeMappings = [...mappings];
-var dropdownOptionSelected = "all";
 
 var activeMetaPrograms = "all";
+
+var mcd;
 
 
 function showDropdown() {
@@ -35,40 +36,29 @@ function answerChosen(answer) {
 };
 
 function chooseSentence() {
-    correctAnswer = activeMappings[Math.floor(Math.random() * activeMappings.length)];
-    currentSentence = metaModelSentences[correctAnswer].examples[Math.floor(Math.random() * metaModelSentences[correctAnswer].examples.length)]
+    let sentence = mcd.randExample();
+    currentSentence = sentence.example;
+    correctAnswer = sentence.subCategory;
     document.getElementById("sentence").innerHTML = currentSentence;
 };
 
 function selectMappings(choice) {
-    dropdownOptionSelected = choice;
+    mcd.chosenCategory = choice;
 
-    switch (dropdownOptionSelected) {
-        case "deletion":
-            activeMappings = [...deletions];
-            break;
-        case "distortion":
-            activeMappings = [...distortions];
-            break;
-        case "generalization":
-            activeMappings = [...generalizations];
-            break;
-        case "all":
-            activeMappings = deletions.concat(distortions, generalizations);
-            break;
-    }
-    showDropdown();
     if (dropdownShowing) {
         chooseSentence();
     } else {
         document.getElementById("sentence").innerHTML = "";
     }
+    console.log(dropdownShowing);
+    showDropdown();
+
 
     // make buttons selected or unselected
     let allDropdownButtons = document.getElementsByClassName("dropdownButton");
-    let selectedDropdownButtons = document.getElementsByClassName("dropdown:" + dropdownOptionSelected);
+    let selectedDropdownButtons = document.getElementsByClassName("dropdown:" + mcd.chosenCategory);
     let allAnswerButtons = document.getElementsByClassName("answerButton");
-    let selectedAnswerButtons = document.getElementsByClassName("answer:" + dropdownOptionSelected);
+    let selectedAnswerButtons = document.getElementsByClassName("answer:" + mcd.chosenCategory);
 
     //make all answer- and dropdown buttons invisible
     for (let i = 0; i < allAnswerButtons.length; i++) {
@@ -88,7 +78,7 @@ function selectMappings(choice) {
     }
 
     // if "all" selected, show all answerButtons.
-    if (dropdownOptionSelected === "all") {
+    if (mcd.chosenCategory === "all") {
         //make all answer- and dropdown buttons visible
         for (let i = 0; i < allAnswerButtons.length; i++) {
             allAnswerButtons[i].style.display = "block";
@@ -223,21 +213,55 @@ function chooseNextMetaPrograms(amountOfMetaPrograms) {
     }
 }
 
+class Sentence {
+    constructor(category, subCategory, example) {
+        this.category = category;
+        this.subCategory = subCategory;
+        this.example = example;
+    }
+}
+
 class MultipleChoiceDict {
     constructor(dict) {
-        this.dict = dict;                   // the dictionary
-        this.keys = Object.keys(this.dict);      // the keys
+        this.dict = dict;                       // the dictionary
+        this.chosenCategory = "all";
+    }
+
+    getCategoryKeys() {
+        return Object.keys(this.dict);
+    }
+
+    getSubCategoryKeys(category) {
+        return Object.keys(this.dict[category]);
+    }
+
+    getExamplesList(category, subCategory) {
+        return this.dict[category][subCategory].examples;
     }
 
     randCategory() {
-        return randFromList(this.keys, 1)[0];
+        return randFromList(this.getCategoryKeys(), 1)[0];
     }
 
-    randExample(category = null) {
+    randSubCategory(category = null) {
         if (category) {
-            return randFromList(this.dict[category].examples, 1)[0];
+            return randFromList(this.getSubCategoryKeys(category), 1)[0];
         }
-        return this.randExample(this.randCategory());
+        return this.randSubCategory(this.randCategory());
+    }
+
+    randExample(category = null, subCategory = null) {
+        if (category) {
+            if (subCategory) {
+                let example = randFromList(this.dict[category][subCategory].examples, 1)[0];
+                return new Sentence(category, subCategory, example);
+            }
+            return this.randExample(category, this.randSubCategory(category));
+        }
+        if (this.chosenCategory === "all") {
+            return this.randExample(this.randCategory());
+        }
+        return this.randExample(this.chosenCategory);
     }
 }
 
@@ -248,41 +272,68 @@ function startMetaModelTrainer1() {
     clearIndex();
     // document.getElementById("title").innerHTML = "Meta Model Trainer 1 (Beginner)";
     document.getElementById("title").innerHTML = "Asking Specific Questions";
-    
-    let mcd = new MultipleChoiceDict(metaModelSentences);
-    
-
-    document.getElementById("selectionDropdown").innerHTML = "";
-    document.getElementById("dropdown").style.display = "block";
     makeH2("", "topDiv", "sentence");
 
-    makeDropdownButton("Deletion", function () { selectMappings("deletion"); });
-    makeDropdownButton("Distortion", function () { selectMappings("distortion"); });
-    makeDropdownButton("Generalization", function () { selectMappings("generalization"); });
+    mcd = new MultipleChoiceDict(metaModelSentences);
+
+    // make div for each category
+    for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
+        let category = mcd.getCategoryKeys()[i];
+        makeDiv(category + "Buttons", "bottomDiv", category);
+        makeH2(category, category + "Buttons");
+
+        // generate answer buttons
+        for (let i = 0; i < mcd.getSubCategoryKeys(category).length; i++) {
+            let subCategory = mcd.getSubCategoryKeys(category)[i];
+            makeAnswerButton(subCategory, category, category + "Buttons", function () {
+                answerChosen(subCategory); chooseSentence(mcd);
+            });
+        }
+    }
+    chooseSentence();
+
+    // make dropdown
+    document.getElementById("selectionDropdown").innerHTML = "";
+    document.getElementById("dropdown").style.display = "block";
+
+    for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
+        let category = mcd.getCategoryKeys()[i];
+        makeDropdownButton(category, function () { selectMappings(category); });
+    }
     makeDropdownButton("All", function () { selectMappings("all"); });
 
 
+    // document.getElementById("selectionDropdown").innerHTML = "";
+    // document.getElementById("dropdown").style.display = "block";
+    // makeH2("", "topDiv", "sentence");
 
-    // generate Buttons for different answers
-    makeDiv("deletionButtons", "bottomDiv", "Deletion");
-    makeH2("Deletions", "deletionButtons");
-    makeDiv("deletionDropdown", "selectionDropdown", "");
-    for (let i = 0; i < deletions.length; i++) {
-        makeAnswerButton(deletions[i], "deletion", "deletionButtons", function () { answerChosen(deletions[i]); chooseSentence(); });
-    }
-    makeDiv("distortionButtons", "bottomDiv", "Distortion");
-    makeH2("Distortions", "distortionButtons");
-    makeDiv("distortionDropdown", "selectionDropdown", "");
-    for (let i = 0; i < distortions.length; i++) {
-        makeAnswerButton(distortions[i], "distortion", "distortionButtons", function () { answerChosen(distortions[i]); chooseSentence(); });
-    }
-    makeDiv("generalizationButtons", "bottomDiv", "Generalization");
-    makeH2("Generalizations", "generalizationButtons");
-    makeDiv("generalizationDropdown", "selectionDropdown", "");
-    for (let i = 0; i < generalizations.length; i++) {
-        makeAnswerButton(generalizations[i], "generalization", "generalizationButtons", function () { answerChosen(generalizations[i]); chooseSentence(); });
-    }
-    chooseSentence();
+    // makeDropdownButton("Deletion", function () { selectMappings("deletion"); });
+    // makeDropdownButton("Distortion", function () { selectMappings("distortion"); });
+    // makeDropdownButton("Generalization", function () { selectMappings("generalization"); });
+    // makeDropdownButton("All", function () { selectMappings("all"); });
+
+
+
+    // // generate Buttons for different answers
+    // makeDiv("deletionButtons", "bottomDiv", "Deletion");
+    // makeH2("Deletions", "deletionButtons");
+    // makeDiv("deletionDropdown", "selectionDropdown", "");
+    // for (let i = 0; i < deletions.length; i++) {
+    //     makeAnswerButton(deletions[i], "deletion", "deletionButtons", function () { answerChosen(deletions[i]); chooseSentence(); });
+    // }
+    // makeDiv("distortionButtons", "bottomDiv", "Distortion");
+    // makeH2("Distortions", "distortionButtons");
+    // makeDiv("distortionDropdown", "selectionDropdown", "");
+    // for (let i = 0; i < distortions.length; i++) {
+    //     makeAnswerButton(distortions[i], "distortion", "distortionButtons", function () { answerChosen(distortions[i]); chooseSentence(); });
+    // }
+    // makeDiv("generalizationButtons", "bottomDiv", "Generalization");
+    // makeH2("Generalizations", "generalizationButtons");
+    // makeDiv("generalizationDropdown", "selectionDropdown", "");
+    // for (let i = 0; i < generalizations.length; i++) {
+    //     makeAnswerButton(generalizations[i], "generalization", "generalizationButtons", function () { answerChosen(generalizations[i]); chooseSentence(); });
+    // }
+    // chooseSentence();
 };
 
 function startEnrichedLanguageTrainer1() {
@@ -437,7 +488,9 @@ function clearIndex() {
     document.getElementById("bottomDiv").innerHTML = "";
     document.getElementById("title").innerHTML = "";
     document.getElementById("dropdown").style.display = "none";
-    dropdownOptionSelected = "all";
+    if (mcd != null) {
+        mcd.chosenCategory = "all";
+    }
 };
 
 function showTrainings() {
@@ -472,6 +525,7 @@ function selectTraining(trainingCode) {
 
 window.addEventListener("load", function () {
     clearIndex();
+
     // startEnrichedLanguageTrainer2();
     startMetaModelTrainer1();
     // startIntentionReframeTrainer1();
@@ -479,6 +533,5 @@ window.addEventListener("load", function () {
     // startMetaProgramTrainer1();
     // startReframingTrainer1();
 
-    console.log(miltonPatterns.length);
 });
 
