@@ -200,24 +200,14 @@ function chooseRandEnrichedSentence() {
     document.getElementById("sentence").innerHTML = randES;
 };
 
+// this function chooses n random metaprograms, and puts them in the right h3
+function chooseNextMetaPrograms(amountOfMetaPrograms) {
+    let chosenKey = randFromList(Object.keys(metaPrograms), 1)[0];
+    let chosenPrograms = randFromList(Object.keys(metaPrograms[chosenKey]), amountOfMetaPrograms);
 
-function chooseNextMetaPrograms() {
-    document.getElementById("topDiv").innerHTML = "";
-    var dv = document.createElement("div");
-    dv.id = "metaProgramsDiv";
-    document.getElementById("topDiv").appendChild(dv);
-
-    let chosenMetaPrograms = [];
-    for (let i = 0; i < 3; i++) {
-        let chosenType = getRandFromList(Object.keys(metaPrograms));
-        let chosenProgram;
-        do {
-            chosenProgram = getRandFromList(Object.keys(metaPrograms[chosenType]));
-        } while (chosenMetaPrograms.includes(chosenProgram));
-
-        chosenMetaPrograms.push(chosenProgram);
-        let chosenText = chosenProgram + ": " + getRandFromList(metaPrograms[chosenType][chosenProgram]);
-        makeH3(chosenText, "metaProgramsDiv", id = "textarea" + (i + 1))
+    for (let i = 0; i < amountOfMetaPrograms; i++) {
+        document.getElementById("mp:" + (i + 1)).innerHTML =
+            chosenPrograms[i] + ": " + randFromList(metaPrograms[chosenKey][chosenPrograms[i]], 1)[0];
     }
 }
 
@@ -367,12 +357,28 @@ function startReframingTrainer1() {
 function startMetaProgramTrainer1() {
     document.getElementById("title").innerHTML = "Meta Program Trainer 1";
 
-    chooseNextMetaPrograms();
+    let amountOfMetaPrograms = 3;
 
+    // create div inside topDiv
+    var dv = document.createElement("div");
+    dv.id = "metaProgramsDiv";
+    document.getElementById("topDiv").appendChild(dv);
+
+    // create h3s in topDiv
+    for (let i = 0; i < amountOfMetaPrograms; i++) {
+        makeH3("a", "metaProgramsDiv", "mp:" + (i + 1));
+    }
+
+    // create textareas in bottomDiv
     for (let i = 0; i < contexts.length; i++) {
         makeTextArea("textarea" + (i + 1), "bottomDiv", placeholder = contexts[i], small = true);
     }
 
+    // fill h3's with random meta programs
+    chooseNextMetaPrograms(amountOfMetaPrograms);
+
+
+    // on enter key: set new random meta programs and clear text areas
     document.getElementById("textarea4").onkeydown = function () {
         var key = event.keyCode || event.charCode;
         if (key == 13) {
@@ -380,7 +386,7 @@ function startMetaProgramTrainer1() {
             for (let i = 0; i < contexts.length; i++) {
                 document.getElementById("textarea" + (i + 1)).value = "";
             }
-            chooseNextMetaPrograms();
+        chooseNextMetaPrograms(amountOfMetaPrograms);
         }
     };
 }
