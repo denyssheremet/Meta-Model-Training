@@ -594,7 +594,7 @@ function selectTraining(trainingCode) {
             break;
         case "LLT1": startLogicalLevelsTrainer1();
             break;
-        case "MPT1": startMultipleChoiceTrainer(metaProgramsMC, "Meta Program Trainer 1", false);
+        case "MPT1": startMultipleChoiceTrainer(metaProgramsMC, "Meta Program Trainer 1");
             break;
         case "MPT2": startMetaProgramTrainer2();
             break;
