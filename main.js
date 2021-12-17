@@ -104,10 +104,10 @@ function makeDropdownButton(name, func) {
 function makeTextArea(id, appendTo, placeholder = "", small = false) {
     let ta = document.createElement("textarea");
     ta.id = id;
+    ta.style.margin = "5px";
     ta.placeholder = placeholder;
     if (small) {
         ta.style.minHeight = "0px";
-        ta.style.margin = "10px";
     }
     document.getElementById(appendTo).appendChild(ta);
 
@@ -535,6 +535,27 @@ function startMetaProgramTrainer2() {
     };
 }
 
+function startMetaProgramTrainer4() {
+    mcd = new MultipleChoiceDict(metaPrograms);
+    console.log(mcd);
+    let subCat = [];
+    for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
+        let cat = mcd.getCategoryKeys()[i];
+        subCat.push(mcd.getSubCategoryKeys(cat));
+    }
+    subCat = subCat.flat();
+    console.log(subCat);
+
+    makeTextArea("", "topDiv", "Context:", true);
+
+    for (let i = 0; i < subCat.length; i++) {
+        makeTextArea("", "topDiv", subCat[i], true);
+    }
+
+    makeTextArea("", "topDiv", "Plan / Language:");
+
+}
+
 // Clears index.html so another Trainer can be started.
 function clearIndex() {
     document.getElementById("topDiv").innerHTML = "";
@@ -577,6 +598,8 @@ function selectTraining(trainingCode) {
             break;
         case "MPT2": startMetaProgramTrainer2();
             break;
+        case "MPT4": startMetaProgramTrainer4();
+            break;
         case "MPT1": startReframingTrainer1();
             break;
     }
@@ -601,7 +624,7 @@ window.addEventListener("load", function () {
     // startMetaProgramTrainer2();
     // startReframingTrainer1();
 
-    selectTraining("MPT1");
+    selectTraining("MPT4");
     showTrainings();
 });
 

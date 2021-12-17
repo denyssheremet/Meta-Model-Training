@@ -40,6 +40,9 @@ The user sees a sentence or paragraph, and needs to select which meta programs c
 Meta Programs Training 3 (Expert):
 The user sees a statement, job offer, or product offer, and a list of 1, 2, or 3 meta programs, and needs to rephrase the statement to suit those meta programs.
 
+Meta Programs Fill In:
+You can Fill in each meta program for yourself.
+
 Meta Program Pattern Trainer 4:
 The user sees a meta program pattern (e.g. Macho Test) and an advice, and needs to formulate that advice using the pattern.
 
