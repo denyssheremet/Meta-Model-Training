@@ -3,7 +3,7 @@
 var metaPrograms = {
     motivation: {
         "Level": ["Proactive", "Reactive"],
-        "Criteria": [""],
+        // "Criteria": [""],
         "Direction": ["Towards", "Away From"],
         "Source": ["Internal", "External"],
         "Reason": ["Options", "Procedures"],

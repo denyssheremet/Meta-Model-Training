@@ -51,6 +51,14 @@ textarea {
     background-color: #2980B9;
 }
 
+#doubleBindDiv0, #doubleBindDiv1, #doubleBindDiv2 {
+    display: flex;
+}
+
+#t1, #t2 {
+    width: 50%;
+}
+
 .dropdown {
     position: relative;
     display: content;

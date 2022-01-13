@@ -464,30 +464,54 @@ function startLogicalLevelsTrainer1() {
     };
 }
 
-function startReframingTrainer1() {
-    document.getElementById("title").innerHTML = "Reframing Trainer 1";
+function startWritingTrainer1(fromList, title) {
+    let score = 0;
+    let amount = 4;
+    document.getElementById("title").innerHTML = title + score;
+    let dv = document.createElement("div");
+    dv.id = "innerDiv";
+    dv.style.margin = "50px";
+    document.getElementById("topDiv").appendChild(dv);
 
-    question = new Question()
-    getRandSentence(negativeBehaviours);
-
-    let chosenFrames = randFromList(frames, 3);
-    for (let i = 0; i < chosenFrames.length; i++) {
-        makeTextArea("textarea" + (i + 1), "bottomDiv", placeholder = chosenFrames[i], small = true);
+    // question = new Question()
+    // makeH3("", "topDiv", "sentence");
+    // getRandSentence(fromList);
+    let rand = randFromList(fromList, amount);
+    for (let i = 0; i < amount; i++) {
+        makeH3(rand[i], "innerDiv");
     }
+    makeTextArea("textarea", "bottomDiv");
 
-    document.getElementById("textarea3").onkeydown = function () {
+
+    document.getElementById("textarea").onkeydown = function () {
         var key = event.keyCode || event.charCode;
         if (key == 13) {
-            chosenFrames = randFromList(frames, 3);
-            for (let i = 0; i < chosenFrames.length; i++) {
-                document.getElementById("textarea" + (i + 1)).value = "";
-                document.getElementById("textarea" + (i + 1)).placeholder = chosenFrames[i];
+            document.getElementById("textarea").value = "";
+            document.getElementById("innerDiv").innerHTML = "";
+            rand = randFromList(fromList, amount);
+            for (let i = 0; i < amount; i++) {
+                makeH3(rand[i], "innerDiv");
             }
-            getRandSentence(negativeBehaviours);
+            score += amount;
+            document.getElementById("title").innerHTML = title + score;
         }
     };
 }
 
+
+function startDoubleBindTrainer() {
+    document.getElementById("title").innerHTML = "Meta Program Trainer 2";
+
+    for (let i = 0; i < 3; i++) {
+        let dv = document.createElement("div");
+        dv.id = "doubleBindDiv" + i;
+        document.getElementById("topDiv").appendChild(dv);
+        makeTextArea("t1", "doubleBindDiv" + i);
+        makeTextArea("t2", "doubleBindDiv" + i);
+    }
+
+    makeTextArea("t3", "topDiv");
+}
 
 
 function startMetaProgramTrainer2() {
@@ -571,6 +595,17 @@ function clearIndex() {
     }
 };
 
+function startSelfAdviceWriter1() {
+    makeH2("Suggestion Model", "topDiv");
+    // makeH2("Macho Test", "topDiv");
+    makeH2("Sell to Internals", "topDiv");
+    // makeH2("3-2-1 Away From Sandwich", "topDiv");
+    makeH2("Bad News Formula", "topDiv");
+    // makeH2("4Mat Opener", "topDiv");
+    makeTextArea("", "bottomDiv");
+
+}
+
 function showTrainings() {
     if (trainingDropdownOpen) {
         document.getElementById("trainingDropdown").style.display = "none";
@@ -600,7 +635,17 @@ function selectTraining(trainingCode) {
             break;
         case "MPT4": startMetaProgramTrainer4();
             break;
-        case "MPT1": startReframingTrainer1();
+        case "RET1": startWritingTrainer1(sleightOfMouth, "Reframing Trainer: ");
+            break;
+        case "MIL1": startWritingTrainer1(miltonPatterns1, "Milton Patterns: ");
+            break;
+        case "PRE1": startWritingTrainer1(mainPresuppositions, "Presuppositions: ");
+            break;
+        case "SUB1": startWritingTrainer1(importantSubModalities, "Submodalities: ");
+            break;
+        case "SAW1": startSelfAdviceWriter1();
+            break;
+        case "DBT1": startDoubleBindTrainer();
             break;
     }
 }
@@ -624,7 +669,7 @@ window.addEventListener("load", function () {
     // startMetaProgramTrainer2();
     // startReframingTrainer1();
 
-    selectTraining("MPT4");
+    selectTraining("DBT1");
     showTrainings();
 });
 
