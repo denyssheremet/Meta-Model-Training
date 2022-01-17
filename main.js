@@ -264,7 +264,7 @@ class Sentence {
 class MultipleChoiceDict {
     constructor(dict) {
         this.dict = dict;                       // the dictionary
-        this.chosenCategory = "all";
+        this.chosenCategory = this.getCategoryKeys()[0];
     }
 
     getCategoryKeys() {
@@ -339,7 +339,7 @@ function startMultipleChoiceTrainer(dict, title, buttons = true) {
         for (let i = 0; i < mcd.getCategoryKeys().length; i++) {
             let category = mcd.getCategoryKeys()[i];
             makeDiv(category + "Buttons", "bottomDiv", category);
-            makeH2(category, category + "Buttons");
+            // makeH2(category, category + "Buttons");
 
             // generate answer buttons
             for (let j = 0; j < mcd.getSubCategoryKeys(category).length; j++) {
@@ -361,8 +361,9 @@ function startMultipleChoiceTrainer(dict, title, buttons = true) {
         makeTextArea("input", "bottomDiv");
         autocomplete(document.getElementById("input"), subCats, "bottomDiv",
             function (answer) { answerChosen(answer); chooseSentence(); });
-        console.log(subCats);
     }
+    selectMappings(mcd.chosenCategory);
+    dropdown.toggleOpen();
 
     chooseSentence();
 
@@ -374,7 +375,7 @@ function startMultipleChoiceTrainer(dict, title, buttons = true) {
         let category = mcd.getCategoryKeys()[i];
         makeDropdownButton(category, function () { selectMappings(category); });
     }
-    makeDropdownButton("All", function () { selectMappings("all"); });
+    // makeDropdownButton("All", function () { selectMappings("all"); });
 };
 
 
@@ -619,7 +620,7 @@ function selectTraining(trainingCode) {
     showTrainings();
     clearIndex();
     switch (trainingCode) {
-        case "MMT1": startMultipleChoiceTrainer(metaModelSentences, "Meta Model Trainer 1 (Beginner)");
+        case "MMT1": startMultipleChoiceTrainer(metaModelSentences, "Meta Model Trainer");
             break;
         case "ELT1": startEnrichedLanguageTrainer1();
             break;
@@ -669,7 +670,7 @@ window.addEventListener("load", function () {
     // startMetaProgramTrainer2();
     // startReframingTrainer1();
 
-    selectTraining("DBT1");
+    selectTraining("MMT1");
     showTrainings();
 });
 

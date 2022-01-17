@@ -85,6 +85,7 @@ var miltonPatterns1 = [
     // "Embedded Question", "Embedded Command", "Quotes",
     // "Presupposition", "Conversational Postulate",
 ]
+// Lost performative 
 
 var presuppositionEnvironments = [
     "Proper Names",
