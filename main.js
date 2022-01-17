@@ -4,12 +4,24 @@ var activeMetaPrograms = "all";
 
 var mcd;
 var dropdown;
-var question
+var question;
 
 
 function answerChosen(answer) {
     if (!question.checkAnswer(answer)) {
-        alert("Your answer: " + answer + "\nCorrect answer: " + question.answer);
+        console.log(question.wrong);
+        switch (question.wrong) {
+            case 0: alert("Are you sure??");
+                question.wrong += 1;
+                break;
+            default: alert("Your answer: " + answer + "\nCorrect answer: " + question.answer);
+                question.wrong = 0;
+                chooseSentence();
+                break;
+        }
+    } else {
+        question.wrong = 0;
+        chooseSentence();
     };
 };
 
@@ -191,6 +203,7 @@ function chooseNextMetaPrograms(amountOfMetaPrograms) {
 class Question {
     constructor() {
         this.id = "sentence";
+        this.wrong = 0;
         makeH2("", "topDiv", this.id);
     }
 
@@ -345,7 +358,7 @@ function startMultipleChoiceTrainer(dict, title, buttons = true) {
             for (let j = 0; j < mcd.getSubCategoryKeys(category).length; j++) {
                 let subCategory = mcd.getSubCategoryKeys(category)[j];
                 makeAnswerButton(subCategory, category, category + "Buttons", function () {
-                    answerChosen(subCategory); chooseSentence();
+                    answerChosen(subCategory);
                 });
             }
         }
