@@ -2,11 +2,6 @@
 var metaModelSentences = {
     "Level 1": {
         "Unspecified Noun": {
-            questions: [
-                "People/Men/Women/Bankers/They/... are evil -> Who specifically is evil?",
-                "Schools don't work -> Which schools specificallly?",
-                "I have learned a lot -> What have you learned specifically?",
-            ],
             examples:
                 `
     I want a change
@@ -43,11 +38,6 @@ var metaModelSentences = {
     I like food
 `},
         "Simple Deletion": {
-            questions: [
-                "I paint -> What do you paint?",
-                "We've talked -> Talked about what?",
-                "They stole -> Stole what? From whom?",
-            ],
             examples:
                 `
     I'm unhappy
@@ -57,6 +47,7 @@ var metaModelSentences = {
     We can manage 
     I just can't start
     He is wrong 
+    It's perfect
     I know 
     I feel
     I feel curious 
@@ -67,11 +58,6 @@ var metaModelSentences = {
     Stop it
 `},
         "Comparative Deletion": {
-            questions: [
-                "I'm the best -> Best at what? Compared to whom?",
-                "Cats are better than dogs -> Better at what / better in what way?",
-                "He is more intelligent -> More intelligent than who? How have you measured intelligence?",
-            ],
             examples:
                 `
     Our new product is more effective
@@ -95,11 +81,6 @@ var metaModelSentences = {
     },
     "Level 2": {
         "Unspecified Verb": {
-            questions: [
-                "We need to grow -> What do you mean by grow?",
-                "We are improving communication -> How are you improving it?",
-                "We need to change this -> Change in what way?",
-            ],
             examples:
                 `
     She rejected me
@@ -120,11 +101,6 @@ var metaModelSentences = {
     Let's go!
 `},
         "Nominalization": {
-            questions: [
-                "This is a disruption -> disrupt ->  What does it disrupt?.",
-                "There was a discussion -> discuss -> What did you discuss? With whom?",
-                "We had a meeting -> meet -> Who did you meet? What did you talk about?",
-            ],
             examples:
                 `
     I want recognition
@@ -146,11 +122,6 @@ var metaModelSentences = {
     Decisions are hard
 `},
         "Universal Quantifiers": {
-            questions: [
-                "All cats are evil -> All cats? Has there ever been a cat that wasn't evil?",
-                "Nobody can understand this -> Nobody? Not even one person? Not even you?",
-                "Everybody does/feels ... -> Is there anybody that doesn't do/feel ...?",
-            ],
             examples:
                 `
 He never listens to me
@@ -173,11 +144,6 @@ Doctors are always healthy
     },
     "Level 3": {
         "Complex Equivalence": {
-            questions: [
-                "Her yelling means that she doesn't care about me -> How does her yelling mean that she doesn't care about you?",
-                "He is late, so he must be smart -> How does him being late mean that he is smart?",
-                "You cooked spaghetti, so you must be Italian -> How does cooking spaghetti mean that one is Italian?",
-            ],
             examples:
                 `
 He's silent, that means he ...
@@ -194,11 +160,6 @@ He doesn't know what I want so he doesn't care about me
 She goes down to the gym so she must be healthy
 `},
         "Lost Comparative": {
-            questions: [
-                "This is important -> According to whom?",
-                "This is the best opportunity of your lifetime -> According to whom?",
-                "Bankers are evil -> According to whom?",
-            ],
             examples:
                 `
 it's disaster to be made redundant
@@ -222,11 +183,6 @@ People are more flexible these days
 They've been at it again
 `},
         "Mind Reading": {
-            questions: [
-                "I know you are going to like this -> How do you know that?",
-                "You are sad -> How do you know?",
-                "He hates me -> How do you know?",
-            ],
             examples:
                 `
 you don't rate me
@@ -249,11 +205,6 @@ I know you're enjoying this
 I know what you mean
 `},
         "Cause and Effect": {
-            questions: [
-                "You make me angry -> How exactly do I make you angry? Are you sure that is the cause?",
-                "That makes me sad -> How exactly does that make you sad? Are you sure that is the cause?",
-                "Painting makes you more creative -> How exactly does painting make you more creative?",
-            ],
             examples:
                 `
 He makes me cringe just by speaking
@@ -278,11 +229,6 @@ Things always go wrong when she walks in here
     },
     "Level 4": {
         "Modal Operator of Necessity": {
-            questions: [
-                "",
-                "",
-                "",
-            ],
             examples:
                 `
     I have to take care of her by feeding her grapes
@@ -304,11 +250,6 @@ Things always go wrong when she walks in here
     You mustn't read this sentence right now
 `},
         "Modal Operator of Possibility": {
-            questions: [
-                "",
-                "",
-                "",
-            ],
             examples:
                 `
     I can't tell you the truth about what my given name is
@@ -330,11 +271,6 @@ Things always go wrong when she walks in here
     I might do what he says I should do at 19:00
 `},
         "Presupposition": {
-            questions: [
-                "",
-                "",
-                "",
-            ],
             examples:
                 `
 What are we going to do next?
